@@ -68,7 +68,8 @@
   "dependencies": {
     "idb": "^8.0.0",
     "fast-glob": "^3.3.2",
-    "minimatch": "^9.0.3"
+    "minimatch": "^9.0.3",
+    "@aws-sdk/client-translate": "^3.493.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",

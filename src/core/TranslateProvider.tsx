@@ -1,4 +1,4 @@
-import React, { useState, useEffect, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { TranslateContext } from "./TranslateContext";
 import type { Translator, TranslateContextValue } from "../types";
 

@@ -2,12 +2,12 @@ import type {
   TranslatorConfig,
   Translator,
   TranslationAdapter,
-  Translation,
   TranslationParams,
 } from "../types";
 import { GoogleTranslateAdapter } from "../adapters/GoogleTranslateAdapter";
 import { DeepLAdapter } from "../adapters/DeepLAdapter";
 import { AWSTranslateAdapter } from "../adapters/AWSTranslateAdapter";
+import { NoopAdapter } from "../adapters/NoopAdapter";
 import { CacheManager } from "../cache/CacheManager";
 import {
   processTranslation,
@@ -57,18 +57,34 @@ class TranslatorImpl implements Translator {
     switch (this.config.provider) {
       case "google":
         if (!this.config.apiKey) {
+          if (this.config.fallbackToOriginal) {
+            console.warn(
+              "Google API key missing — falling back to NoopAdapter"
+            );
+            return new NoopAdapter();
+          }
           throw new Error("API key is required for Google Translate");
         }
         return new GoogleTranslateAdapter(this.config.apiKey);
 
       case "deepl":
         if (!this.config.apiKey) {
+          if (this.config.fallbackToOriginal) {
+            console.warn("DeepL API key missing — falling back to NoopAdapter");
+            return new NoopAdapter();
+          }
           throw new Error("API key is required for DeepL");
         }
         return new DeepLAdapter(this.config.apiKey);
 
       case "aws":
         if (!this.config.credentials) {
+          if (this.config.fallbackToOriginal) {
+            console.warn(
+              "AWS credentials missing — falling back to NoopAdapter"
+            );
+            return new NoopAdapter();
+          }
           throw new Error("AWS credentials are required for AWS Translate");
         }
         return new AWSTranslateAdapter(this.config.credentials);

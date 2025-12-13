@@ -1,0 +1,9 @@
+# Example env for the basic example
+# Obtain an API key from Google Cloud Translate and set it here.
+VITE_TRANSLATE_API_KEY=
+
+# Optionally set provider to 'deepl' or 'aws' and configure their credentials.
+# VITE_DEEPL_API_KEY=
+# VITE_AWS_ACCESS_KEY_ID=
+# VITE_AWS_SECRET_ACCESS_KEY=
+# VITE_AWS_REGION=

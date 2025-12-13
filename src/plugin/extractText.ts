@@ -1,5 +1,5 @@
 import { parse } from "@babel/parser";
-import traverse from "@babel/traverse";
+import * as babelTraverse from "@babel/traverse";
 import type { JSXText, JSXAttribute, StringLiteral } from "@babel/types";
 import type { ExtractedText } from "../types";
 
@@ -46,7 +46,10 @@ export function extractTextsFromCode(
       plugins: ["jsx", "typescript", "decorators-legacy"],
     });
 
-    traverse(ast, {
+    const traverseFn: typeof babelTraverse =
+      (babelTraverse as any).default || babelTraverse;
+
+    traverseFn(ast, {
       // Extract text from JSX elements: <h1>Welcome</h1>
       JSXText(path) {
         if (!mergedPatterns.jsxText) return;
