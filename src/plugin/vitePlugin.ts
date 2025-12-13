@@ -101,9 +101,13 @@ export function extractTranslatableText(config: PluginConfig): Plugin {
     },
 
     // Also extract during development for HMR
-    handleHotUpdate({ file }) {
+    async handleHotUpdate({ file }) {
       if (
-        isMatchingFile(file, mergedConfig.include!, mergedConfig.exclude || [])
+        await isMatchingFile(
+          file,
+          mergedConfig.include!,
+          mergedConfig.exclude || []
+        )
       ) {
         if (mergedConfig.verbose) {
           console.log(`🔄 Hot reload: Re-extracting from ${file}`);
@@ -135,24 +139,45 @@ async function getMatchingFiles(
 /**
  * Check if file matches include/exclude patterns
  */
-function isMatchingFile(
+async function isMatchingFile(
   file: string,
   include: string[],
   exclude: string[]
-): boolean {
-  const minimatch = require("minimatch");
+): Promise<boolean> {
+  // Dynamically import minimatch in an ESM-friendly way
+  let minimatch: any = null;
+  try {
+    const mod = await import("minimatch");
+    minimatch = (mod as any).default || mod;
+  } catch (e) {
+    // ignore import error — we'll fallback to simple checks
+    minimatch = null;
+  }
 
   // Check if file matches any include pattern
-  const included = include.some((pattern) =>
-    minimatch(file, pattern, { matchBase: true })
-  );
+  const included = include.some((pattern) => {
+    if (minimatch && typeof minimatch === "function") {
+      return minimatch(file, pattern, { matchBase: true });
+    }
+    // Fallback: simple endsWith check for basic patterns
+    if (pattern.startsWith("**/")) {
+      return file.endsWith(pattern.replace("**/", ""));
+    }
+    return file.includes(pattern.replace(/\*/g, ""));
+  });
 
   if (!included) return false;
 
   // Check if file matches any exclude pattern
-  const excluded = exclude.some((pattern) =>
-    minimatch(file, pattern, { matchBase: true })
-  );
+  const excluded = exclude.some((pattern) => {
+    if (minimatch && typeof minimatch === "function") {
+      return minimatch(file, pattern, { matchBase: true });
+    }
+    if (pattern.startsWith("**/")) {
+      return file.endsWith(pattern.replace("**/", ""));
+    }
+    return file.includes(pattern.replace(/\*/g, ""));
+  });
 
   return !excluded;
 }

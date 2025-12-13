@@ -1,5 +1,4 @@
 import { parse } from "@babel/parser";
-import * as babelTraverse from "@babel/traverse";
 import type { JSXText, JSXAttribute, StringLiteral } from "@babel/types";
 import type { ExtractedText } from "../types";
 
@@ -46,66 +45,70 @@ export function extractTextsFromCode(
       plugins: ["jsx", "typescript", "decorators-legacy"],
     });
 
-    const traverseFn: typeof babelTraverse =
-      (babelTraverse as any).default || babelTraverse;
+    // Small recursive AST walker instead of @babel/traverse to avoid
+    // module interop/runtime issues when the plugin is loaded inside
+    // different package contexts (example vs root). The walker visits
+    // all nodes and collects relevant text nodes.
+    function simpleTraverse(node: any) {
+      if (!node || typeof node !== "object") return;
 
-    traverseFn(ast, {
-      // Extract text from JSX elements: <h1>Welcome</h1>
-      JSXText(path) {
-        if (!mergedPatterns.jsxText) return;
-
-        const text = (path.node as JSXText).value.trim();
-
-        if (shouldExtract(text, minLength, ignore)) {
-          extracted.push({
-            text,
-            file: filename,
-            line: path.node.loc?.start.line || 0,
-            type: "jsxText",
-          });
-        }
-      },
-
-      // Extract text from JSX attributes: <input placeholder="Enter name" />
-      JSXAttribute(path) {
-        const node = path.node as JSXAttribute;
-        const attrName = node.name.name;
-
-        if (
-          typeof attrName === "string" &&
-          mergedPatterns.jsxAttribute.includes(attrName) &&
-          node.value &&
-          node.value.type === "StringLiteral"
-        ) {
-          const text = (node.value as StringLiteral).value;
-
+      const type = node.type;
+      if (type === "JSXText") {
+        if (mergedPatterns.jsxText) {
+          const text = (node as JSXText).value.trim();
           if (shouldExtract(text, minLength, ignore)) {
             extracted.push({
               text,
               file: filename,
               line: node.loc?.start.line || 0,
+              type: "jsxText",
+            });
+          }
+        }
+      } else if (type === "JSXAttribute") {
+        const nodeAttr = node as JSXAttribute;
+        const attrName = (nodeAttr.name && (nodeAttr.name as any).name) || null;
+        if (
+          typeof attrName === "string" &&
+          mergedPatterns.jsxAttribute.includes(attrName) &&
+          nodeAttr.value &&
+          nodeAttr.value.type === "StringLiteral"
+        ) {
+          const text = (nodeAttr.value as StringLiteral).value;
+          if (shouldExtract(text, minLength, ignore)) {
+            extracted.push({
+              text,
+              file: filename,
+              line: nodeAttr.loc?.start.line || 0,
               type: "jsxAttribute",
             });
           }
         }
-      },
-
-      // Optional: Extract marked string literals
-      StringLiteral(path) {
-        if (!mergedPatterns.stringLiterals) return;
-
-        const text = (path.node as StringLiteral).value;
-
-        if (shouldExtract(text, minLength, ignore)) {
-          extracted.push({
-            text,
-            file: filename,
-            line: path.node.loc?.start.line || 0,
-            type: "stringLiteral",
-          });
+      } else if (type === "StringLiteral") {
+        if (mergedPatterns.stringLiterals) {
+          const text = (node as StringLiteral).value;
+          if (shouldExtract(text, minLength, ignore)) {
+            extracted.push({
+              text,
+              file: filename,
+              line: node.loc?.start.line || 0,
+              type: "stringLiteral",
+            });
+          }
         }
-      },
-    });
+      }
+
+      for (const key of Object.keys(node)) {
+        const child = (node as any)[key];
+        if (Array.isArray(child)) {
+          for (const c of child) simpleTraverse(c);
+        } else if (child && typeof child.type === "string") {
+          simpleTraverse(child);
+        }
+      }
+    }
+
+    simpleTraverse((ast as any).program || ast);
 
     if (verbose && extracted.length > 0) {
       console.log(`✓ Extracted ${extracted.length} texts from ${filename}`);
