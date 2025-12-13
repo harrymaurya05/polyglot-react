@@ -34,3 +34,7 @@ coverage
 
 # Build artifacts
 *.tsbuildinfo
+
+# Compiled TypeScript files in src (keep dist/)
+src/**/*.js
+examples/*/src/**/*.js

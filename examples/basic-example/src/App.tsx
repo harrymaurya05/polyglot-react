@@ -1,4 +1,8 @@
-import { TranslateProvider, createTranslator } from "react-translate-ai-custom";
+import {
+  TranslateProvider,
+  createTranslator,
+  useTranslate,
+} from "react-translate-ai-custom";
 import Header from "./components/Header";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import textsToTranslate from "./translations/texts.json";
@@ -19,6 +23,8 @@ const translator = createTranslator({
 });
 
 function App() {
+  const t = useTranslate();
+
   return (
     <TranslateProvider
       translator={translator}
@@ -30,18 +36,20 @@ function App() {
         <Header />
         <main>
           <section className="hero">
-            <h2>Welcome to Our App!</h2>
-            <p>This is an example of automatic AI-powered translation.</p>
-            <button>Get Started</button>
+            <h2>{t("Welcome to Our App!")}</h2>
+            <p>
+              {t("This is an example of automatic AI-powered translation.")}
+            </p>
+            <button>{t("Get Started")}</button>
           </section>
 
           <section className="features">
-            <h3>Features</h3>
+            <h3>{t("Features")}</h3>
             <ul>
-              <li>Automatic text extraction</li>
-              <li>Smart caching for offline use</li>
-              <li>Multiple translation providers</li>
-              <li>Zero maintenance</li>
+              <li>{t("Automatic text extraction")}</li>
+              <li>{t("Smart caching for offline use")}</li>
+              <li>{t("Multiple translation providers")}</li>
+              <li>{t("Zero maintenance")}</li>
             </ul>
           </section>
         </main>
