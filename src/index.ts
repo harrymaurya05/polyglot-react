@@ -2,6 +2,9 @@
 export { createTranslator } from "./core/createTranslator";
 export { TranslateProvider } from "./core/TranslateProvider";
 
+// Adapters
+export { CustomAPIAdapter } from "./adapters/CustomAPIAdapter";
+
 // Hooks
 export { useTranslate } from "./hooks/useTranslate";
 export { useTranslator } from "./hooks/useTranslator";
@@ -22,3 +25,4 @@ export type {
 } from "./types";
 
 export type { TranslateProviderProps } from "./core";
+export type { CustomAPIAdapterOptions } from "./adapters/CustomAPIAdapter";

@@ -8,6 +8,7 @@ import { GoogleTranslateAdapter } from "../adapters/GoogleTranslateAdapter";
 import { DeepLAdapter } from "../adapters/DeepLAdapter";
 import { AWSTranslateAdapter } from "../adapters/AWSTranslateAdapter";
 import { NoopAdapter } from "../adapters/NoopAdapter";
+import { CustomAPIAdapter } from "../adapters/CustomAPIAdapter";
 import { CacheManager } from "../cache/CacheManager";
 import {
   processTranslation,
@@ -88,6 +89,18 @@ class TranslatorImpl implements Translator {
           throw new Error("AWS credentials are required for AWS Translate");
         }
         return new AWSTranslateAdapter(this.config.credentials);
+
+      case "custom":
+        if (!this.config.apiKey) {
+          if (this.config.fallbackToOriginal) {
+            console.warn(
+              "Custom API base URL missing — falling back to NoopAdapter"
+            );
+            return new NoopAdapter();
+          }
+          throw new Error("Base URL is required for Custom API");
+        }
+        return new CustomAPIAdapter(this.config.apiKey);
 
       default:
         throw new Error(

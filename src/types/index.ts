@@ -1,7 +1,7 @@
 /**
  * Translation provider types
  */
-export type TranslationProvider = "google" | "deepl" | "aws";
+export type TranslationProvider = "google" | "deepl" | "aws" | "custom";
 
 /**
  * AWS credentials for AWS Translate
@@ -128,7 +128,7 @@ export interface ExtractedText {
   text: string;
   file: string;
   line: number;
-  type: "jsxText" | "jsxAttribute" | "stringLiteral";
+  type: "jsxText" | "jsxAttribute" | "stringLiteral" | "functionCall";
 }
 
 /**

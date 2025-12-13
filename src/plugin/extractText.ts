@@ -96,6 +96,23 @@ export function extractTextsFromCode(
             });
           }
         }
+      } else if (type === "CallExpression") {
+        // Extract from t() function calls
+        const callee = node.callee;
+        if (callee && callee.type === "Identifier" && callee.name === "t") {
+          const args = node.arguments;
+          if (args && args.length > 0 && args[0].type === "StringLiteral") {
+            const text = args[0].value;
+            if (shouldExtract(text, minLength, ignore)) {
+              extracted.push({
+                text,
+                file: filename,
+                line: node.loc?.start.line || 0,
+                type: "functionCall",
+              });
+            }
+          }
+        }
       }
 
       for (const key of Object.keys(node)) {
