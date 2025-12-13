@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "baseUrl": "./",
+    "skipLibCheck": true,
+    "types": ["vite/client"],
+    "paths": {
+      "react-translate-ai-custom": ["../../src"],
+      "react-translate-ai-custom/*": ["../../src/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}
