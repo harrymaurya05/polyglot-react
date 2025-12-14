@@ -1,6 +1,6 @@
 # Basic Example - React Translate AI Custom
 
-This example demonstrates the basic usage of react-translate-ai-custom library.
+This example demonstrates the basic usage of @polyglot/react library.
 
 ## Setup
 

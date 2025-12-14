@@ -1,6 +1,6 @@
-# react-translate-ai-custom Examples
+# @polyglot/react Examples
 
-This directory contains example implementations of the react-translate-ai-custom library.
+This directory contains example implementations of the @polyglot/react library.
 
 ## Basic Usage Example
 

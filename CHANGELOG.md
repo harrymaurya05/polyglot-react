@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial release of react-translate-ai-custom
+- Initial release of @polyglot/react
 - Vite plugin for automatic text extraction from JSX/TSX files
 - Support for Google Translate, DeepL, and AWS Translate APIs
 - Smart caching with LocalStorage and IndexedDB support

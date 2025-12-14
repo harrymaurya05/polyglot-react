@@ -1,4 +1,4 @@
-# react-translate-ai-custom
+# @polyglot/react
 
 AI-powered automatic translation library for React applications with intelligent caching and zero-maintenance workflow.
 
@@ -77,9 +77,9 @@ Your Lib: Visit site → Auto-detect Hindi preference → Show Hindi → Perfect
 ## 📦 Installation
 
 ```bash
-npm install react-translate-ai-custom
+npm install @polyglot/react
 # or
-yarn add react-translate-ai-custom
+yarn add @polyglot/react
 ```
 
 ## 🔧 Setup
@@ -90,7 +90,7 @@ yarn add react-translate-ai-custom
 // vite.config.js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { extractTranslatableText } from "react-translate-ai-custom/plugin";
+import { extractTranslatableText } from "@polyglot/react/plugin";
 
 export default defineConfig({
   plugins: [
@@ -108,7 +108,7 @@ export default defineConfig({
 
 ```jsx
 // src/App.jsx
-import { TranslateProvider, createTranslator } from "react-translate-ai-custom";
+import { TranslateProvider, createTranslator } from "@polyglot/react";
 import textsToTranslate from "./translations/texts.json";
 
 const translator = createTranslator({
@@ -150,7 +150,7 @@ export default App;
 ### 3. Use Translations in Components
 
 ```jsx
-import { useTranslate } from "react-translate-ai-custom";
+import { useTranslate } from "@polyglot/react";
 
 function Header() {
   const t = useTranslate();
@@ -194,7 +194,7 @@ function Header() {
 ## 🌍 Dynamic Language Switching
 
 ```jsx
-import { useTranslator } from "react-translate-ai-custom";
+import { useTranslator } from "@polyglot/react";
 
 function LanguageSwitcher() {
   const { changeLanguage, currentLang, isLoading } = useTranslator();
@@ -289,7 +289,7 @@ cache: {
 For user-generated or API content that isn't in your source code:
 
 ```jsx
-import { useTranslateDynamic } from "react-translate-ai-custom";
+import { useTranslateDynamic } from "@polyglot/react";
 
 function UserComment({ comment }) {
   const translateDynamic = useTranslateDynamic();
@@ -345,7 +345,7 @@ VITE_DEFAULT_LANGUAGE=en
 Mock translations in tests:
 
 ```jsx
-import { MockTranslateProvider } from "react-translate-ai-custom/testing";
+import { MockTranslateProvider } from "@polyglot/react/testing";
 
 test("renders welcome message", () => {
   render(
@@ -421,7 +421,7 @@ MIT © 2025
 
 ## 🙋 Support
 
-- 📧 Email: support@react-translate-ai-custom.com
+- 📧 Email: support@@polyglot/react.com
 - 💬 Discord: [Join our community](#)
 - 🐛 Issues: [GitHub Issues](#)
 

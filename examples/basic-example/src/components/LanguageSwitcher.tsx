@@ -1,4 +1,4 @@
-import { useTranslator } from "react-translate-ai-custom";
+import { useTranslator } from "@polyglot/react";
 
 const languages = [
   { code: "en", name: "English" },

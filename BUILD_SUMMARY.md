@@ -2,7 +2,7 @@
 
 ## 🎉 Project Successfully Created!
 
-The `react-translate-ai-custom` library has been fully implemented with all core features.
+The `@polyglot/react` library has been fully implemented with all core features.
 
 ## 📦 What Was Built
 
@@ -121,7 +121,7 @@ The `react-translate-ai-custom` library has been fully implemented with all core
 ## 📋 Project Structure
 
 ```
-react-translate-ai-custom/
+@polyglot/react/
 ├── src/
 │   ├── adapters/          # Translation providers
 │   ├── cache/             # Cache implementations

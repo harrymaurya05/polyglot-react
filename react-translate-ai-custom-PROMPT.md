@@ -1,8 +1,8 @@
-# Prompt for Building react-translate-ai-custom Library
+# Prompt for Building @polyglot/react Library
 
 ## Project Overview
 
-Create a React library called `react-translate-ai-custom` that provides automatic AI-powered translation with intelligent caching and zero-maintenance workflow. The library should eliminate the need for developers to manually maintain translation JSON files.
+Create a React library called `@polyglot/react` that provides automatic AI-powered translation with intelligent caching and zero-maintenance workflow. The library should eliminate the need for developers to manually maintain translation JSON files.
 
 ## Core Concept
 
@@ -303,7 +303,7 @@ function getCacheKey(targetLang, textsHash, appVersion) {
 ## Project Structure
 
 ```
-react-translate-ai-custom/
+@polyglot/react/
 ├── src/
 │   ├── core/
 │   │   ├── createTranslator.ts

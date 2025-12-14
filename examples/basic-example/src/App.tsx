@@ -2,7 +2,7 @@ import {
   TranslateProvider,
   createTranslator,
   useTranslate,
-} from "react-translate-ai-custom";
+} from "@polyglot/react";
 import Header from "./components/Header";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import textsToTranslate from "./translations/texts.json";

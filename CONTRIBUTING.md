@@ -1,4 +1,4 @@
-# Contributing to react-translate-ai-custom
+# Contributing to @polyglot/react
 
 Thank you for your interest in contributing! This document provides guidelines for contributing to the project.
 
@@ -7,8 +7,8 @@ Thank you for your interest in contributing! This document provides guidelines f
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/react-translate-ai-custom.git
-cd react-translate-ai-custom
+git clone https://github.com/yourusername/@polyglot/react.git
+cd @polyglot/react
 ```
 
 2. **Install dependencies**
@@ -67,7 +67,7 @@ src/
 
 ### Reporting Bugs
 
-1. Check if the bug has already been reported in [Issues](https://github.com/yourusername/react-translate-ai-custom/issues)
+1. Check if the bug has already been reported in [Issues](https://github.com/yourusername/@polyglot/react/issues)
 2. If not, create a new issue with:
    - Clear title and description
    - Steps to reproduce
@@ -188,9 +188,9 @@ export class AzureTranslateAdapter implements TranslationAdapter {
 
 ## Questions?
 
-- Open a [Discussion](https://github.com/yourusername/react-translate-ai-custom/discussions)
+- Open a [Discussion](https://github.com/yourusername/@polyglot/react/discussions)
 - Join our [Discord](https://discord.gg/your-server)
-- Email: support@react-translate-ai-custom.com
+- Email: support@@polyglot/react.com
 
 ## License
 

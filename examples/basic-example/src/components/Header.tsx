@@ -1,4 +1,4 @@
-import { useTranslate } from "react-translate-ai-custom";
+import { useTranslate } from "@polyglot/react";
 
 function Header() {
   const t = useTranslate();

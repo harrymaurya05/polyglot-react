@@ -8,8 +8,8 @@
     "skipLibCheck": true,
     "types": ["vite/client"],
     "paths": {
-      "react-translate-ai-custom": ["../../src"],
-      "react-translate-ai-custom/*": ["../../src/*"]
+      "@polyglot/react": ["../../src"],
+      "@polyglot/react/*": ["../../src/*"]
     }
   },
   "include": ["src/**/*"]

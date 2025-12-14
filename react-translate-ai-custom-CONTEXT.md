@@ -2,7 +2,7 @@
 
 ## 📋 Project Summary
 
-Building `react-translate-ai-custom` - an AI-powered React translation library with automatic text extraction, smart caching, and zero-maintenance workflow.
+Building `@polyglot/react` - an AI-powered React translation library with automatic text extraction, smart caching, and zero-maintenance workflow.
 
 ## 🎯 Core Problem Solved
 
@@ -110,7 +110,7 @@ App Startup → Read texts.json → Batch translate → Cache → Serve instantl
 
 ```jsx
 // vite.config.js
-import { extractTranslatableText } from "react-translate-ai-custom/plugin";
+import { extractTranslatableText } from "@polyglot/react/plugin";
 
 export default {
   plugins: [
@@ -122,7 +122,7 @@ export default {
 };
 
 // App.jsx
-import { TranslateProvider, createTranslator } from "react-translate-ai-custom";
+import { TranslateProvider, createTranslator } from "@polyglot/react";
 import texts from "./translations/texts.json";
 
 const translator = createTranslator({
@@ -142,7 +142,7 @@ function App() {
 }
 
 // Component.jsx
-import { useTranslate } from "react-translate-ai-custom";
+import { useTranslate } from "@polyglot/react";
 
 function Header() {
   const t = useTranslate();
@@ -168,8 +168,8 @@ function Header() {
 
 ## 📝 Related Files
 
-- `react-translate-ai-custom-README.md` - Full documentation
-- `react-translate-ai-custom-PROMPT.md` - LLM implementation prompt
+- `@polyglot/react-README.md` - Full documentation
+- `@polyglot/react-PROMPT.md` - LLM implementation prompt
 
 ## 💡 Key Insights
 
@@ -196,7 +196,7 @@ Create a **platform-agnostic translation ecosystem** where the backend API is th
 
 **Platform-Specific SDKs (Free/MIT):**
 
-1. **✅ react-translate-ai-custom** (Current - Web)
+1. **✅ @polyglot/react** (Current - Web)
 
    - Status: Built and working
    - React web apps with Vite plugin

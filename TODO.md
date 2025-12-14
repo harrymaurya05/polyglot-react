@@ -4,23 +4,24 @@
 
 ### 1. Change Library Name
 
-- [ ] Decide on new name (suggestions: `@polyglot/react`, `@lingua/react`, `@transl/react`)
-- [ ] Update `package.json` name field
-- [ ] Update all imports in example app
-- [ ] Update README.md with new name
-- [ ] Update documentation files (CONTEXT, PROMPT, etc.)
-- [ ] Search & replace in all source files
-- [ ] Update GitHub repository name
-- [ ] Reserve npm package name
+- [x] Decide on new name ✅ **@polyglot/react**
+- [x] Update `package.json` name field
+- [x] Update all imports in example app
+- [x] Update README.md with new name
+- [x] Update documentation files (CONTEXT, PROMPT, etc.)
+- [x] Search & replace in all source files
+- [ ] Update GitHub repository name (manual - rename to `polyglot-react`)
+- [ ] Reserve npm package name (run `npm login` then `npm publish`)
 
-**Files to update:**
+**Files updated:**
 
-- `package.json`
-- `README.md`
-- `BUILD_SUMMARY.md`
-- `examples/basic-example/package.json`
-- All documentation files
-- GitHub repo settings
+- ✅ `package.json`
+- ✅ `README.md`
+- ✅ `BUILD_SUMMARY.md`
+- ✅ `examples/basic-example/package.json`
+- ✅ All documentation files
+- ✅ All TypeScript source files
+- ⏳ GitHub repo settings (manual step)
 
 ---
 

@@ -1,5 +1,5 @@
 {
-  "name": "react-translate-ai-custom",
+  "name": "@polyglot/react",
   "version": "1.0.0",
   "description": "AI-powered automatic translation library for React with intelligent caching and zero-maintenance workflow",
   "main": "dist/index.js",
@@ -55,12 +55,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/react-translate-ai-custom.git"
+    "url": "https://github.com/harrymaurya05/polyglot-react.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/react-translate-ai-custom/issues"
+    "url": "https://github.com/harrymaurya05/polyglot-react/issues"
   },
-  "homepage": "https://github.com/yourusername/react-translate-ai-custom#readme",
+  "homepage": "https://github.com/harrymaurya05/polyglot-react#readme",
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
