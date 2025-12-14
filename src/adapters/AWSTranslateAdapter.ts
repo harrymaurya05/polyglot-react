@@ -39,16 +39,21 @@ export class AWSTranslateAdapter implements TranslationAdapter {
   }
 
   async translateBatch(
-    texts: string[],
+    texts: string[] | Record<string, string>,
     sourceLang: string,
     targetLang: string
   ): Promise<Translation[]> {
-    if (texts.length === 0) return [];
+    // Convert object to array of [hash, text] pairs if needed
+    const textEntries = Array.isArray(texts)
+      ? texts.map((t) => [t, t] as [string, string])
+      : Object.entries(texts);
+
+    if (textEntries.length === 0) return [];
 
     // AWS Translate doesn't have native batch support
     // We need to make individual calls but can parallelize them
     const results = await Promise.all(
-      texts.map((text) =>
+      textEntries.map(([_key, text]) =>
         retryWithBackoff(() => this.translateText(text, sourceLang, targetLang))
       )
     );

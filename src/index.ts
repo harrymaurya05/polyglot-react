@@ -3,12 +3,21 @@ export { createTranslator } from "./core/createTranslator";
 export { TranslateProvider } from "./core/TranslateProvider";
 
 // Adapters
-export { CustomAPIAdapter } from "./adapters/CustomAPIAdapter";
+export { PolyglotAPIAdapter } from "./adapters/PolyglotAPIAdapter";
 
 // Hooks
 export { useTranslate } from "./hooks/useTranslate";
 export { useTranslator } from "./hooks/useTranslator";
 export { useTranslateDynamic } from "./hooks/useTranslateDynamic";
+export { useFormat } from "./hooks/useFormat";
+
+// Formatters (can be used standalone)
+export {
+  formatCurrency,
+  formatNumber,
+  formatDate,
+  formatPercent,
+} from "./utils/formatters";
 
 // Types
 export type {
@@ -25,4 +34,4 @@ export type {
 } from "./types";
 
 export type { TranslateProviderProps } from "./core";
-export type { CustomAPIAdapterOptions } from "./adapters/CustomAPIAdapter";
+export type { PolyglotAPIAdapterOptions } from "./adapters/PolyglotAPIAdapter";

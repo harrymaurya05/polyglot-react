@@ -21,14 +21,17 @@ export class DeepLAdapter implements TranslationAdapter {
   }
 
   async translateBatch(
-    texts: string[],
+    texts: string[] | Record<string, string>,
     sourceLang: string,
     targetLang: string
   ): Promise<Translation[]> {
-    if (texts.length === 0) return [];
+    // Convert object to array if needed
+    const textArray = Array.isArray(texts) ? texts : Object.values(texts);
+
+    if (textArray.length === 0) return [];
 
     // DeepL allows up to 50 texts per request
-    const chunks = chunkArray(texts, 50);
+    const chunks = chunkArray(textArray, 50);
     const results: Translation[] = [];
 
     for (const chunk of chunks) {

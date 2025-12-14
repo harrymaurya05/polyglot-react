@@ -16,14 +16,17 @@ export class GoogleTranslateAdapter implements TranslationAdapter {
   }
 
   async translateBatch(
-    texts: string[],
+    texts: string[] | Record<string, string>,
     sourceLang: string,
     targetLang: string
   ): Promise<Translation[]> {
-    if (texts.length === 0) return [];
+    // Convert object to array if needed
+    const textArray = Array.isArray(texts) ? texts : Object.values(texts);
+
+    if (textArray.length === 0) return [];
 
     // Google API can handle up to 128 texts per request
-    const chunks = chunkArray(texts, 100);
+    const chunks = chunkArray(textArray, 100);
     const results: Translation[] = [];
 
     for (const chunk of chunks) {

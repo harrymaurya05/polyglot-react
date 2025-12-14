@@ -220,6 +220,27 @@ function LanguageSwitcher() {
 
 ## 🔌 Translation Provider Configuration
 
+### Polyglot API (Recommended - Official)
+
+Simple, powerful, and purpose-built for this library:
+
+```jsx
+const translator = createTranslator({
+  provider: "polyglot",
+  apiKey: "YOUR_POLYGLOT_API_KEY", // Get from https://usepolyglot.dev
+  // ... other config
+});
+```
+
+**Benefits:**
+
+- ✅ Built-in caching and monitoring
+- ✅ Simple pricing and billing
+- ✅ No complex cloud console setup
+- ✅ Free tier available
+
+[📚 Full Polyglot API Guide →](./POLYGLOT-API-GUIDE.md)
+
 ### Google Translate
 
 ```jsx
@@ -249,6 +270,21 @@ const translator = createTranslator({
     accessKeyId: "YOUR_ACCESS_KEY",
     secretAccessKey: "YOUR_SECRET_KEY",
     region: "us-east-1",
+  },
+  // ... other config
+});
+```
+
+### Custom API (Your Backend)
+
+```jsx
+const translator = createTranslator({
+  provider: "custom",
+  customAPIOptions: {
+    baseUrl: "http://localhost:8080",
+    headers: {
+      "X-API-Key": "your_api_key",
+    },
   },
   // ... other config
 });

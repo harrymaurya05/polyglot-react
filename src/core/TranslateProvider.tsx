@@ -1,6 +1,7 @@
 import { useState, useEffect, type ReactNode } from "react";
 import { TranslateContext } from "./TranslateContext";
 import type { Translator, TranslateContextValue } from "../types";
+import { DefaultLoadingComponent } from "../components/DefaultLoadingComponent";
 
 export interface TranslateProviderProps {
   translator: Translator;
@@ -65,13 +66,18 @@ export function TranslateProvider({
   };
 
   // Show loading component while initializing
-  if (isLoading && loadingComponent) {
-    return <>{loadingComponent}</>;
+  if (isLoading) {
+    return <>{loadingComponent || <DefaultLoadingComponent />}</>;
   }
 
   // Show error component if initialization failed
   if (error && errorComponent) {
     return <>{errorComponent(error)}</>;
+  }
+
+  // Show default error if no custom error component
+  if (error) {
+    return <div>Translation error: {error.message}</div>;
   }
 
   return (

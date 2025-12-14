@@ -7,8 +7,7 @@ import type {
 import { GoogleTranslateAdapter } from "../adapters/GoogleTranslateAdapter";
 import { DeepLAdapter } from "../adapters/DeepLAdapter";
 import { AWSTranslateAdapter } from "../adapters/AWSTranslateAdapter";
-import { NoopAdapter } from "../adapters/NoopAdapter";
-import { CustomAPIAdapter } from "../adapters/CustomAPIAdapter";
+import { PolyglotAPIAdapter } from "../adapters/PolyglotAPIAdapter";
 import { CacheManager } from "../cache/CacheManager";
 import {
   processTranslation,
@@ -58,49 +57,32 @@ class TranslatorImpl implements Translator {
     switch (this.config.provider) {
       case "google":
         if (!this.config.apiKey) {
-          if (this.config.fallbackToOriginal) {
-            console.warn(
-              "Google API key missing — falling back to NoopAdapter"
-            );
-            return new NoopAdapter();
-          }
           throw new Error("API key is required for Google Translate");
         }
         return new GoogleTranslateAdapter(this.config.apiKey);
 
       case "deepl":
         if (!this.config.apiKey) {
-          if (this.config.fallbackToOriginal) {
-            console.warn("DeepL API key missing — falling back to NoopAdapter");
-            return new NoopAdapter();
-          }
           throw new Error("API key is required for DeepL");
         }
         return new DeepLAdapter(this.config.apiKey);
 
       case "aws":
         if (!this.config.credentials) {
-          if (this.config.fallbackToOriginal) {
-            console.warn(
-              "AWS credentials missing — falling back to NoopAdapter"
-            );
-            return new NoopAdapter();
-          }
           throw new Error("AWS credentials are required for AWS Translate");
         }
         return new AWSTranslateAdapter(this.config.credentials);
 
-      case "custom":
-        if (!this.config.apiKey) {
-          if (this.config.fallbackToOriginal) {
-            console.warn(
-              "Custom API base URL missing — falling back to NoopAdapter"
-            );
-            return new NoopAdapter();
-          }
-          throw new Error("Base URL is required for Custom API");
+      case "polyglot":
+        if (!this.config.polyglotAPIOptions && !this.config.apiKey) {
+          throw new Error(
+            "polyglotAPIOptions or apiKey is required for Polyglot API"
+          );
         }
-        return new CustomAPIAdapter(this.config.apiKey);
+        // Use polyglotAPIOptions if provided, otherwise use apiKey
+        return new PolyglotAPIAdapter(
+          this.config.polyglotAPIOptions || this.config.apiKey!
+        );
 
       default:
         throw new Error(
@@ -187,21 +169,34 @@ class TranslatorImpl implements Translator {
   async translateDynamic(text: string): Promise<string> {
     if (!text) return "";
 
+    // Use hash for cache key to avoid issues with long texts
+    const textHash = hashString(text);
+    const cacheKey = `dynamic_${this.currentLang}_${textHash}`;
+
     // Check if already in cache
-    const cached = this.translations.get(text);
+    const cached = await this.cacheManager.get(cacheKey);
     if (cached) return cached;
 
+    // Also check in-memory map (for backwards compatibility during same session)
+    const memCached = this.translations.get(text);
+    if (memCached) return memCached;
+
     try {
-      // Translate single text
+      // Send as hash-text pair for efficient backend caching
+      // Backend receives: {"abc123": "actual long text here"}
       const results = await this.adapter.translateBatch(
-        [text],
+        { [textHash]: text },
         this.config.sourceLang,
         this.currentLang
       );
 
       if (results.length > 0) {
         const translated = results[0].translated;
+
+        // Store in both cache and in-memory map
+        await this.cacheManager.set(cacheKey, translated);
         this.translations.set(text, translated);
+
         return translated;
       }
 

@@ -1,7 +1,9 @@
+import type { PolyglotAPIAdapterOptions } from "../adapters/PolyglotAPIAdapter";
+
 /**
  * Translation provider types
  */
-export type TranslationProvider = "google" | "deepl" | "aws" | "custom";
+export type TranslationProvider = "google" | "deepl" | "aws" | "polyglot";
 
 /**
  * AWS credentials for AWS Translate
@@ -35,6 +37,7 @@ export interface TranslatorConfig {
   provider: TranslationProvider;
   apiKey?: string;
   credentials?: AWSCredentials; // For AWS only
+  polyglotAPIOptions?: PolyglotAPIAdapterOptions; // For Polyglot API
   textToTranslate: string[]; // From texts.json
   cache: CacheConfig;
   fallbackToOriginal?: boolean;
@@ -56,7 +59,7 @@ export interface Translation {
  */
 export interface TranslationAdapter {
   translateBatch(
-    texts: string[],
+    texts: string[] | Record<string, string>,
     sourceLang: string,
     targetLang: string
   ): Promise<Translation[]>;
