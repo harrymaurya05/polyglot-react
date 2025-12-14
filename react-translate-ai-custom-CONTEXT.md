@@ -178,3 +178,122 @@ function Header() {
 - Single batch API = 90% cost savings vs. per-text translation
 - Build-time extraction = zero runtime overhead
 - Caching = instant performance + offline support
+
+## 🚀 Future Scope - Multi-Platform Strategy
+
+### Vision
+
+Create a **platform-agnostic translation ecosystem** where the backend API is the moneymaker, and platform SDKs are open-source drivers.
+
+### Core Architecture
+
+**Universal Backend API (Revenue Source):**
+
+- Single translation API endpoint: `POST /api/translate`
+- Platform-agnostic (serves web, mobile, native apps)
+- Usage tracking, billing, analytics
+- All platforms point to this paid service
+
+**Platform-Specific SDKs (Free/MIT):**
+
+1. **✅ react-translate-ai-custom** (Current - Web)
+
+   - Status: Built and working
+   - React web apps with Vite plugin
+   - JSX/TSX text extraction
+
+2. **📱 react-translate-ai-native** (Phase 2 - High Priority)
+
+   - React Native support
+   - ~70% code reuse from web version
+   - AsyncStorage instead of LocalStorage
+   - Extract from React Native components
+   - Same backend API
+
+3. **🍎 ios-translate-ai** (Phase 3)
+
+   - Native iOS SDK (Swift/SwiftUI)
+   - Parse Swift code for extraction
+   - SwiftUI Text() component support
+   - Same backend API
+
+4. **🤖 android-translate-ai** (Phase 3)
+
+   - Native Android SDK (Kotlin/Jetpack Compose)
+   - Parse Kotlin/Compose for extraction
+   - Composable Text() support
+   - Same backend API
+
+5. **🦋 flutter-translate-ai** (Phase 4 - Optional)
+
+   - Flutter/Dart SDK
+   - Cross-platform mobile (if demand exists)
+   - Same backend API
+
+6. **🌐 vue-translate-ai / angular-translate-ai** (Phase 4 - Optional)
+   - Web framework variants
+   - Same backend API
+
+### Business Model
+
+**Open Core Strategy:**
+
+- SDKs: Free (MIT) - Increases adoption, builds community
+- Backend API: Paid - Actual revenue source
+- All platforms use same billing/tracking
+
+**Pricing Tiers:**
+
+- Free: 50K chars/month, all platforms
+- Pro: $39/mo - 1M chars, multi-platform support
+- Enterprise: $299/mo - Unlimited, all platforms, SLA
+
+### Platform Comparison
+
+| Platform       | Extraction | SDK Complexity | Code Reuse | Priority   |
+| -------------- | ---------- | -------------- | ---------- | ---------- |
+| React Web      | JSX/TSX    | ✅ Done        | -          | ✅ Phase 1 |
+| React Native   | JSX        | Easy           | 70%        | 🔥 Phase 2 |
+| iOS Native     | Swift      | Medium         | 30%        | Phase 3    |
+| Android Native | Kotlin     | Medium         | 30%        | Phase 3    |
+| Flutter        | Dart       | Medium         | 40%        | Phase 4    |
+| Vue/Angular    | Templates  | Easy           | 50%        | Phase 4    |
+
+### Implementation Priority
+
+**Phase 1 (Now - Q4 2024):**
+
+- ✅ React web library complete
+- 🔨 Build backend translation API
+- 📊 Get first paying customers
+
+**Phase 2 (Q1 2025):**
+
+- React Native SDK
+- Test with mobile developers
+- Validate cross-platform backend
+
+**Phase 3 (Q2 2025):**
+
+- Native iOS if demand
+- Native Android if demand
+- Enterprise customers needing native apps
+
+**Phase 4 (Q3+ 2025):**
+
+- Flutter/Vue/Angular if market demands
+- Focus on platforms with traction
+
+### Technical Advantages
+
+1. **Single Backend:** One API to maintain, scale, and monetize
+2. **Platform Freedom:** Developers choose their stack, we handle translation
+3. **Vendor Lock-in:** Once integrated, switching providers is painful
+4. **Network Effects:** More platforms → more users → more revenue
+5. **Open Source Growth:** Free SDKs build trust and adoption
+
+### Key Differentiator
+
+**The only zero-maintenance, auto-extracting translation solution that works across ALL platforms** - web, mobile, native iOS/Android, Flutter.
+
+Competitors are locked to single platforms (react-i18next = React only, flutter_i18n = Flutter only). We cover the entire market.
