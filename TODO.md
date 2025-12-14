@@ -10,7 +10,7 @@
 - [x] Update README.md with new name
 - [x] Update documentation files (CONTEXT, PROMPT, etc.)
 - [x] Search & replace in all source files
-- [ ] Update GitHub repository name (manual - rename to `polyglot-react`)
+- [x] Update GitHub repository name ✅ **polyglot-react**
 - [ ] Reserve npm package name (run `npm login` then `npm publish`)
 
 **Files updated:**
@@ -21,7 +21,7 @@
 - ✅ `examples/basic-example/package.json`
 - ✅ All documentation files
 - ✅ All TypeScript source files
-- ⏳ GitHub repo settings (manual step)
+- ✅ GitHub repo renamed to `polyglot-react`
 
 ---
 

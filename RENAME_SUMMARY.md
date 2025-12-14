@@ -38,10 +38,8 @@
 
 ### 1. Rename GitHub Repository
 
-1. Go to: https://github.com/harrymaurya05/eact-translate-ai/settings
-2. Scroll to "Repository name"
-3. Change to: `polyglot-react`
-4. Click "Rename"
+- ✅ **DONE:** Repository renamed to `polyglot-react`
+- ✅ URL: https://github.com/harrymaurya05/polyglot-react
 
 ### 2. Publish to npm
 
