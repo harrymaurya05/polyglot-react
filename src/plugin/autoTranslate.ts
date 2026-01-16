@@ -231,13 +231,6 @@ export async function autoTranslate(
 
   if (verbose) {
     console.log(`\n💾 Translation store updated: ${storePath}`);
-  }
-
-  // Export translations to individual language files
-  const translationsDir = path.join(path.dirname(textsFilePath), "locales");
-  await exportTranslations(storePath, translationsDir, targetLangs);
-
-  if (verbose) {
     console.log(`✅ Auto-translation completed!\n`);
   }
 }

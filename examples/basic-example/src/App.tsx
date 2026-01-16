@@ -23,7 +23,7 @@ const translationsMap = getTranslationsMap();
 const supportedLanguages = Object.keys(translationsMap);
 
 function App() {
-  const [currentLang, setCurrentLang] = useState("hi");
+  const [currentLang, setCurrentLang] = useState("en");
 
   const t = (text: string): string => {
     // Return translated text from pre-built translations

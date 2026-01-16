@@ -9,9 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aws-sdk/client-translate": "^3.970.0",
+    "@polyglot/react": "file:../..",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@polyglot/react": "file:../.."
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.55",
