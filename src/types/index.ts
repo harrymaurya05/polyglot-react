@@ -122,6 +122,13 @@ export interface PluginConfig {
   minLength?: number;
   ignore?: RegExp[];
   verbose?: boolean;
+  autoTranslate?: {
+    enabled: boolean;
+    adapter: TranslationAdapter;
+    sourceLang: string;
+    targetLangs: string[];
+    storeFilePath?: string;
+  };
 }
 
 /**

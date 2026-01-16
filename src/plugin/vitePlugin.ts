@@ -2,7 +2,8 @@ import * as fs from "fs";
 import * as path from "path";
 import type { Plugin } from "vite";
 import { extractTextsFromCode } from "./extractText";
-import type { PluginConfig } from "../types";
+import type { PluginConfig, TranslationAdapter } from "../types";
+import { autoTranslate } from "./autoTranslate";
 
 const DEFAULT_CONFIG: Partial<PluginConfig> = {
   exclude: ["**/node_modules/**", "**/*.test.{jsx,tsx}", "**/*.spec.{jsx,tsx}"],
@@ -81,6 +82,26 @@ export function extractTranslatableText(config: PluginConfig): Plugin {
 
     if (mergedConfig.verbose) {
       console.log(`💾 Saved to ${outputPath}\n`);
+    }
+
+    // Auto-translate if enabled
+    if (mergedConfig.autoTranslate?.enabled) {
+      if (mergedConfig.verbose) {
+        console.log("🚀 Starting auto-translation...");
+      }
+
+      try {
+        await autoTranslate({
+          adapter: mergedConfig.autoTranslate.adapter,
+          sourceLang: mergedConfig.autoTranslate.sourceLang,
+          targetLangs: mergedConfig.autoTranslate.targetLangs,
+          textsFilePath: outputPath,
+          storeFilePath: mergedConfig.autoTranslate.storeFilePath,
+          verbose: mergedConfig.verbose,
+        });
+      } catch (error) {
+        console.error("❌ Auto-translation failed:", error);
+      }
     }
   };
 

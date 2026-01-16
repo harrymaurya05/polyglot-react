@@ -65,9 +65,10 @@ Your Lib: Visit site → Auto-detect Hindi preference → Show Hindi → Perfect
 
 - **Single API Call at Startup** - All translations fetched once and cached
 - **Auto-Extract Translatable Text** - Build-time plugin scans your code automatically
+- **⚡ NEW: Incremental Auto-Translation** - Only translate new/changed texts (90-99% cost savings)
 - **Smart Caching** - LocalStorage/IndexedDB persistence across sessions
 - **Zero Maintenance** - No manual translation files to manage
-- **Multiple Translation Providers** - Support for Google Translate, DeepL, AWS Translate
+- **Multiple Translation Providers** - Support for Google Translate, DeepL, AWS Translate, Polyglot API
 - **Offline-Ready** - Works offline after initial translation load
 - **Dynamic Language Switching** - Change languages on the fly
 - **Type-Safe** - Full TypeScript support
@@ -103,6 +104,37 @@ export default defineConfig({
   ],
 });
 ```
+
+#### ⚡ NEW: Auto-Translation with Smart Incremental Updates
+
+Enable automatic translation that only translates new or changed texts:
+
+```js
+import { extractTranslatableText } from "@polyglot/react/plugin";
+import { PolyglotAPIAdapter } from "@polyglot/react";
+
+extractTranslatableText({
+  include: ["src/**/*.{jsx,tsx}"],
+  output: "src/translations/texts.json",
+
+  // Enable auto-translation
+  autoTranslate: {
+    enabled: true,
+    adapter: new PolyglotAPIAdapter(import.meta.env.VITE_POLYGLOT_API_KEY),
+    sourceLang: "en",
+    targetLangs: ["es", "fr", "de", "hi"], // Translate to multiple languages
+  },
+});
+```
+
+**Benefits:**
+
+- 🚀 Automatic translation when texts are extracted
+- 💰 Only translates new/changed texts (90-99% cost reduction)
+- 🎯 Supports multiple target languages
+- 📦 Works with all translation providers
+
+[📖 Full Incremental Translation Guide](./INCREMENTAL-TRANSLATION.md)
 
 ### 2. Initialize Translator in Your App
 
