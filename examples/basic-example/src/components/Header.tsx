@@ -1,8 +1,8 @@
-import { useTranslate } from "@polyglot/react";
+interface HeaderProps {
+  t: (text: string) => string;
+}
 
-function Header() {
-  const t = useTranslate();
-
+function Header({ t }: HeaderProps) {
   return (
     <header>
       <h1>{t("React Translate AI")}</h1>

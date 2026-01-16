@@ -1,80 +1,57 @@
-import React from "react";
-import {
-  TranslateProvider,
-  createTranslator,
-  useTranslate,
-  useTranslateDynamic,
-} from "@polyglot/react";
+import { useState } from "react";
 import Header from "./components/Header";
 import LanguageSwitcher from "./components/LanguageSwitcher";
-import textsToTranslate from "./translations/texts.json";
+import translationStore from "./translations/.translation-store.json";
 
-// Create translator instance
+// Extract translations from the store
+function getTranslationsMap() {
+  const translations: Record<string, Record<string, string>> = {};
 
-// To use a self-hosted backend, follow POLYGLOT-API-GUIDE.md for the
-// request/response format. The library now ships with `PolyglotAPIAdapter`.
+  for (const metadata of Object.values(translationStore.metadata)) {
+    for (const [lang, translated] of Object.entries(metadata.translations)) {
+      if (!translations[lang]) {
+        translations[lang] = {};
+      }
+      translations[lang][metadata.text] = translated;
+    }
+  }
 
-//AWS Translate (commented out)
-const translator = createTranslator({
-  sourceLang: "en",
-  targetLang: "hi",
-  provider: "polyglot",
-  polyglotAPIOptions: {
-    baseUrl: import.meta.env.VITE_POLYGLOT_API_URL,
-    timeout: 10000,
-    apiKey: import.meta.env.VITE_POLYGLOT_API_KEY,
-  },
-  textToTranslate: textsToTranslate,
-  cache: {
-    enabled: true,
-    storage: "localStorage",
-    ttl: 30 * 24 * 60 * 60 * 1000,
-  },
-  fallbackToOriginal: true,
-});
+  return translations;
+}
 
-// Simulate API call to database
-const fetchProductsFromDatabase = async () => {
-  // Simulate network delay
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+const translationsMap = getTranslationsMap();
+const supportedLanguages = Object.keys(translationsMap);
 
-  // This would be: return fetch('/api/products').then(r => r.json())
-  return [
-    {
-      id: 1,
-      name: "Laptop",
-      description: "High performance laptop for professionals",
-      price: 999,
-    },
-    {
-      id: 2,
-      name: "Smartphone",
-      description: "Latest model with amazing camera",
-      price: 699,
-    },
-    {
-      id: 3,
-      name: "Headphones",
-      description: "Noise cancelling wireless headphones",
-      price: 199,
-    },
-    {
-      id: 4,
-      name: "Tablet",
-      description: "Portable device for work and entertainment",
-      price: 499,
-    },
-  ];
-};
+function App() {
+  const [currentLang, setCurrentLang] = useState("hi");
 
-function AppContent() {
-  const t = useTranslate();
-  const translateDynamic = useTranslateDynamic();
+  const t = (text: string): string => {
+    // Return translated text from pre-built translations
+    return translationsMap[currentLang]?.[text] || text;
+  };
 
   return (
     <div className="app">
-      <LanguageSwitcher />
-      <Header />
+      <div style={{ padding: "20px", background: "#f0f0f0" }}>
+        <label>{t("Language")}: </label>
+        <select
+          value={currentLang}
+          onChange={(e) => setCurrentLang(e.target.value)}
+          style={{ padding: "5px", fontSize: "16px" }}
+        >
+          {supportedLanguages.map((lang) => (
+            <option key={lang} value={lang}>
+              {lang.toUpperCase()}
+            </option>
+          ))}
+        </select>
+        <span style={{ marginLeft: "10px", color: "#666" }}>
+          {t("⚡ Using pre-translated texts (no API calls!")}
+        </span>
+      </div>
+
+      <Header t={t} />
+
       <main>
         <section className="hero">
           <h2>{t("Welcome to Our App!")}</h2>
@@ -94,14 +71,6 @@ function AppContent() {
         </section>
       </main>
     </div>
-  );
-}
-
-function App() {
-  return (
-    <TranslateProvider translator={translator}>
-      <AppContent />
-    </TranslateProvider>
   );
 }
 

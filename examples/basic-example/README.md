@@ -1,6 +1,6 @@
 # Basic Example - React Translate AI Custom
 
-This example demonstrates the basic usage of @polyglot/react library.
+This example demonstrates the basic usage of @polyglot/react library with **incremental auto-translation**.
 
 ## Setup
 
@@ -13,8 +13,14 @@ npm install
 2. Create a `.env` file with your translation API key:
 
 ```
-VITE_TRANSLATE_API_KEY=your_api_key_here
+# For auto-translation feature (recommended)
+VITE_POLYGLOT_API_KEY=your_polyglot_api_key_here
+
+# Or use other providers
+VITE_TRANSLATE_API_KEY=your_google_or_deepl_key
 ```
+
+Get your API key: [usepolyglot.dev](https://usepolyglot.dev)
 
 3. Run the development server:
 
@@ -25,18 +31,49 @@ npm run dev
 ## What This Example Shows
 
 - **Automatic Text Extraction**: The Vite plugin scans JSX files and generates `texts.json`
-- **Translation Provider Setup**: Configured with Google Translate (can switch to DeepL or AWS)
-- **Caching**: Translations are cached in localStorage for 7 days
+- **⚡ NEW: Auto-Translation**: Automatically translates texts when they're extracted
+- **Incremental Updates**: Only translates new or changed texts (90-99% cost savings)
+- **Translation Provider Setup**: Configured with Polyglot API (can switch to DeepL, Google, or AWS)
+- **Caching**: Translations are cached in localStorage for 30 days
 - **Language Switching**: LanguageSwitcher component allows users to change languages
 - **React Hooks**: Using `useTranslate()` and `useTranslator()` hooks
 
 ## File Structure
 
-- `vite.config.ts` - Vite plugin configuration
+- `vite.config.ts` - Vite plugin with auto-translation enabled
 - `App.tsx` - Main app with TranslateProvider
 - `components/Header.tsx` - Example using useTranslate hook
 - `components/LanguageSwitcher.tsx` - Language selector with useTranslator
 - `translations/texts.json` - Auto-generated translatable texts
+- `translations/.translation-store.json` - Translation cache (auto-created)
+
+## Auto-Translation Feature
+
+The example now includes incremental auto-translation:
+
+```typescript
+// vite.config.ts
+autoTranslate: {
+  enabled: true,
+  adapter: new PolyglotAPIAdapter(process.env.VITE_POLYGLOT_API_KEY),
+  sourceLang: "en",
+  targetLangs: ["es", "fr", "de", "hi", "ja"],
+}
+```
+
+### How It Works
+
+1. **First Build**: Extracts 24 texts → Translates all to 5 languages (120 API calls)
+2. **Add New Text**: Extracts 25 texts → Translates only 1 new text (5 API calls) ✨
+3. **Change Text**: Detects change → Re-translates only that text
+4. **Result**: 95%+ reduction in API calls!
+
+### Generated Files
+
+- `texts.json` - Source texts extracted from code
+- `.translation-store.json` - Translation metadata and cache
+
+**Tip**: Commit `.translation-store.json` to share translations with your team!
 
 ## Supported Languages
 
@@ -48,10 +85,26 @@ npm run dev
 
 ## How It Works
 
-1. **Build Time**: Vite plugin scans all `.tsx` files and extracts text into `texts.json`
-2. **App Startup**: TranslateProvider makes a single batch API call to translate all texts
-3. **Runtime**: Components use `useTranslate()` to get translated text from cache
-4. **Language Switch**: User changes language → new translations fetched and cached
+1. **Build Time**:
+
+   - Vite plugin scans all `.tsx` files and extracts text into `texts.json`
+   - Auto-translation detects new/changed texts
+   - Only new/changed texts are translated via API
+   - Translations saved to `.translation-store.json`
+
+2. **App Startup**:
+
+   - TranslateProvider loads from runtime (uses translations from store)
+   - All texts available instantly from cache
+
+3. **Runtime**:
+
+   - Components use `useTranslate()` to get translated text
+   - Translations served from cache (no API calls)
+
+4. **Language Switch**:
+   - User changes language → translations already cached
+   - No additional API calls needed!
 
 ## Try It Out
 
