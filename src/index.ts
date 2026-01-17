@@ -24,8 +24,6 @@ export type {
   TranslatorConfig,
   TranslationProvider,
   AWSCredentials,
-  CacheStorage,
-  CacheConfig,
   Translation,
   TranslationAdapter,
   Translator,

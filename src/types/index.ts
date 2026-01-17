@@ -15,20 +15,6 @@ export interface AWSCredentials {
 }
 
 /**
- * Cache storage type
- */
-export type CacheStorage = "localStorage" | "indexedDB";
-
-/**
- * Cache configuration
- */
-export interface CacheConfig {
-  enabled: boolean;
-  storage: CacheStorage;
-  ttl: number; // Time to live in milliseconds
-}
-
-/**
  * Main translator configuration
  */
 export interface TranslatorConfig {
@@ -39,7 +25,6 @@ export interface TranslatorConfig {
   credentials?: AWSCredentials; // For AWS only
   polyglotAPIOptions?: PolyglotAPIAdapterOptions; // For Polyglot API
   textToTranslate: string[]; // From texts.json
-  cache: CacheConfig;
   fallbackToOriginal?: boolean;
   batchSize?: number; // Default: 100
   retryAttempts?: number; // Default: 3
@@ -63,27 +48,6 @@ export interface TranslationAdapter {
     sourceLang: string,
     targetLang: string
   ): Promise<Translation[]>;
-}
-
-/**
- * Cache interface
- */
-export interface CacheInterface {
-  set(key: string, value: any, ttl: number): Promise<void> | void;
-  get(key: string): Promise<any | null> | any | null;
-  has(key: string): Promise<boolean> | boolean;
-  clear(): Promise<void> | void;
-  isExpired(key: string): Promise<boolean> | boolean;
-}
-
-/**
- * Cached data structure
- */
-export interface CachedData<T = any> {
-  value: T;
-  timestamp: number;
-  ttl: number;
-  version?: string;
 }
 
 /**

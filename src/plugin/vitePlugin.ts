@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import type { Plugin } from "vite";
 import { extractTextsFromCode } from "./extractText";
-import type { PluginConfig, TranslationAdapter } from "../types";
+import type { PluginConfig } from "../types";
 import { autoTranslate } from "./autoTranslate";
 
 const DEFAULT_CONFIG: Partial<PluginConfig> = {

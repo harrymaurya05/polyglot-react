@@ -9,7 +9,6 @@ function Header({ t }: HeaderProps) {
       <nav>
         <a href="/">{t("Home")}</a>
         <a href="/about">{t("About")}</a>
-        <a href="/about">{t("Kiran")}</a>
         <a href="/contact">{t("Contact")}</a>
       </nav>
     </header>

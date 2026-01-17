@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as crypto from "crypto";
-import type { TranslationAdapter, Translation } from "../types";
+import type { TranslationAdapter } from "../types";
 import {
   loadTranslationStore,
   saveTranslationStore,
@@ -110,6 +110,19 @@ export async function autoTranslate(
   const needsTranslation =
     textsToTranslate.length > 0 || languagesNeedingTranslation.length > 0;
 
+  // Clean up deleted texts even if no new translations needed
+  let updatedStore = store;
+  if (changes.deletedHashes.length > 0) {
+    updatedStore = cleanupDeletedTexts(updatedStore, changes.deletedHashes);
+    if (verbose) {
+      console.log(
+        `\n🗑️  Cleaned up ${changes.deletedHashes.length} deleted texts`
+      );
+    }
+    // Save the cleaned store
+    saveTranslationStore(storePath, updatedStore);
+  }
+
   if (!needsTranslation) {
     if (verbose) {
       console.log("\n✅ All texts are up to date. No translation needed.");
@@ -126,7 +139,7 @@ export async function autoTranslate(
   }
 
   // Translate for each target language
-  let updatedStore: TranslationStore = store;
+  // updatedStore was already initialized above
 
   for (const targetLang of targetLangs) {
     // Skip if this language doesn't need translation
@@ -216,17 +229,7 @@ export async function autoTranslate(
     }
   }
 
-  // Clean up deleted texts
-  if (changes.deletedHashes.length > 0) {
-    updatedStore = cleanupDeletedTexts(updatedStore, changes.deletedHashes);
-    if (verbose) {
-      console.log(
-        `\n🗑️  Cleaned up ${changes.deletedHashes.length} deleted texts`
-      );
-    }
-  }
-
-  // Save updated store
+  // Save updated store (deleted texts were already cleaned up earlier)
   saveTranslationStore(storePath, updatedStore);
 
   if (verbose) {

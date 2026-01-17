@@ -1,30 +1,4 @@
 /**
- * Generate a hash from a string
- */
-export function hashString(str: string): string {
-  let hash = 0;
-
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash; // Convert to 32-bit integer
-  }
-
-  return Math.abs(hash).toString(36);
-}
-
-/**
- * Generate cache key for translations
- */
-export function getCacheKey(
-  targetLang: string,
-  textsHash: string,
-  version?: string
-): string {
-  return `translate_${targetLang}_${textsHash}${version ? `_v${version}` : ""}`;
-}
-
-/**
  * Split array into chunks
  */
 export function chunkArray<T>(array: T[], size: number): T[][] {
@@ -77,16 +51,6 @@ export function isBrowser(): boolean {
   return (
     typeof window !== "undefined" && typeof window.document !== "undefined"
   );
-}
-
-/**
- * Get app version from package.json or environment
- */
-export function getAppVersion(): string {
-  if (isBrowser()) {
-    return (window as any).__APP_VERSION__ || "1.0.0";
-  }
-  return "1.0.0";
 }
 
 /**

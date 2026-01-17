@@ -8,13 +8,7 @@ import { GoogleTranslateAdapter } from "../adapters/GoogleTranslateAdapter";
 import { DeepLAdapter } from "../adapters/DeepLAdapter";
 import { AWSTranslateAdapter } from "../adapters/AWSTranslateAdapter";
 import { PolyglotAPIAdapter } from "../adapters/PolyglotAPIAdapter";
-import { CacheManager } from "../cache/CacheManager";
-import {
-  processTranslation,
-  hashString,
-  getCacheKey,
-  getAppVersion,
-} from "../utils";
+import { processTranslation } from "../utils";
 
 /**
  * Create a translator instance
@@ -26,7 +20,6 @@ export function createTranslator(config: TranslatorConfig): Translator {
 class TranslatorImpl implements Translator {
   private config: TranslatorConfig;
   private adapter: TranslationAdapter;
-  private cacheManager: CacheManager;
   private translations: Map<string, string>;
   private currentLang: string;
   private ready: boolean;
@@ -42,7 +35,6 @@ class TranslatorImpl implements Translator {
     };
 
     this.adapter = this.createAdapter();
-    this.cacheManager = new CacheManager(config.cache);
     this.translations = new Map();
     this.currentLang = config.targetLang;
     this.ready = false;
@@ -102,23 +94,6 @@ class TranslatorImpl implements Translator {
 
   private async doInitialize(): Promise<void> {
     try {
-      // Generate cache key
-      const textsHash = hashString(JSON.stringify(this.config.textToTranslate));
-      const cacheKey = getCacheKey(
-        this.currentLang,
-        textsHash,
-        getAppVersion()
-      );
-
-      // Try to load from cache
-      const cached = await this.cacheManager.get(cacheKey);
-
-      if (cached) {
-        this.translations = new Map(Object.entries(cached));
-        this.ready = true;
-        return;
-      }
-
       // Fetch translations from API
       const results = await this.adapter.translateBatch(
         this.config.textToTranslate,
@@ -130,10 +105,6 @@ class TranslatorImpl implements Translator {
       for (const result of results) {
         this.translations.set(result.original, result.translated);
       }
-
-      // Cache the translations
-      const translationsObj = Object.fromEntries(this.translations);
-      await this.cacheManager.set(cacheKey, translationsObj);
 
       this.ready = true;
     } catch (error) {
@@ -169,23 +140,14 @@ class TranslatorImpl implements Translator {
   async translateDynamic(text: string): Promise<string> {
     if (!text) return "";
 
-    // Use hash for cache key to avoid issues with long texts
-    const textHash = hashString(text);
-    const cacheKey = `dynamic_${this.currentLang}_${textHash}`;
-
-    // Check if already in cache
-    const cached = await this.cacheManager.get(cacheKey);
-    if (cached) return cached;
-
-    // Also check in-memory map (for backwards compatibility during same session)
+    // Check in-memory map first
     const memCached = this.translations.get(text);
     if (memCached) return memCached;
 
     try {
-      // Send as hash-text pair for efficient backend caching
-      // Backend receives: {"abc123": "actual long text here"}
+      // Translate dynamically via API
       const results = await this.adapter.translateBatch(
-        { [textHash]: text },
+        [text],
         this.config.sourceLang,
         this.currentLang
       );
@@ -193,8 +155,7 @@ class TranslatorImpl implements Translator {
       if (results.length > 0) {
         const translated = results[0].translated;
 
-        // Store in both cache and in-memory map
-        await this.cacheManager.set(cacheKey, translated);
+        // Store in memory map
         this.translations.set(text, translated);
 
         return translated;
