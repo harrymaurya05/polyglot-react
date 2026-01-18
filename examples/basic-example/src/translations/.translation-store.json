@@ -401,20 +401,20 @@
         "en": "Zero maintenance"
       }
     },
-    "1df823619050143a7ed5b5b20bc8024c": {
-      "hash": "1df823619050143a7ed5b5b20bc8024c",
-      "text": "⚡ Using pre-translated texts (no API calls!",
-      "lastTranslated": 1768579215485,
+    "2563f9201b3ae1cbdc530cee275d3c62": {
+      "hash": "2563f9201b3ae1cbdc530cee275d3c62",
+      "text": "⚡ Using pre-translated texts (no API calls!)",
+      "lastTranslated": 1768726715870,
       "translations": {
-        "es": "⚡ Uso de textos pretraducidos (¡sin llamadas a la API!",
-        "fr": "⚡ Utiliser des textes pré-traduits (pas d'appels d'API !",
-        "de": "⚡ Verwendung von vorübersetzten Texten (keine API-Aufrufe!",
-        "hi": "⚡ पूर्व-अनुवादित ग्रंथों का उपयोग करना (कोई API कॉल नहीं!",
-        "ja": "⚡ 翻訳済みのテキストを使用する（API呼び出しなし！",
-        "zh": "⚡ 使用预翻译的文本（没有 API 调用！",
-        "ru": "⚡ Использование предварительно переведенных текстов (без вызовов API!",
-        "ur": "⚡ پہلے سے ترجمہ شدہ متن کا استعمال (کوئی API کال نہیں!",
-        "en": "⚡ Using pre-translated texts (no API calls!"
+        "es": "⚡ Uso de textos pretraducidos (¡sin llamadas a la API!)",
+        "fr": "⚡ Utilisation de textes pré-traduits (pas d'appels d'API !)",
+        "de": "⚡ Verwendung von vorübersetzten Texten (keine API-Aufrufe!)",
+        "hi": "⚡ पूर्व-अनुवादित ग्रंथों का उपयोग करना (कोई API कॉल नहीं!)",
+        "ja": "⚡ 翻訳済みのテキストを使用する (API 呼び出しは不要!)",
+        "zh": "⚡ 使用预翻译的文本（没有 API 调用！）",
+        "ru": "⚡ Использование предварительно переведенных текстов (без вызовов API!)",
+        "ur": "⚡ پہلے سے ترجمہ شدہ متن کا استعمال (کوئی API کال نہیں!)",
+        "en": "⚡ Using pre-translated texts (no API calls!)"
       }
     }
   }

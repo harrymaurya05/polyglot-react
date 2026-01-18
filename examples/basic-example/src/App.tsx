@@ -23,7 +23,17 @@ const translationsMap = getTranslationsMap();
 const supportedLanguages = Object.keys(translationsMap);
 
 function App() {
-  const [currentLang, setCurrentLang] = useState("en");
+  // Load language from localStorage or default to "en"
+  const [currentLang, setCurrentLang] = useState(() => {
+    const saved = localStorage.getItem("preferredLanguage");
+    return saved && supportedLanguages.includes(saved) ? saved : "en";
+  });
+
+  // Save language to localStorage when it changes
+  const handleLanguageChange = (lang: string) => {
+    setCurrentLang(lang);
+    localStorage.setItem("preferredLanguage", lang);
+  };
 
   const t = (text: string): string => {
     // Return translated text from pre-built translations
@@ -36,7 +46,7 @@ function App() {
         <label>{t("Language")}: </label>
         <select
           value={currentLang}
-          onChange={(e) => setCurrentLang(e.target.value)}
+          onChange={(e) => handleLanguageChange(e.target.value)}
           style={{ padding: "5px", fontSize: "16px" }}
         >
           {supportedLanguages.map((lang) => (
@@ -46,7 +56,7 @@ function App() {
           ))}
         </select>
         <span style={{ marginLeft: "10px", color: "#666" }}>
-          {t("⚡ Using pre-translated texts (no API calls!")}
+          {t("⚡ Using pre-translated texts (no API calls!)")}
         </span>
       </div>
 
