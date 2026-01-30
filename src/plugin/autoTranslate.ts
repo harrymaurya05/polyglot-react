@@ -8,7 +8,6 @@ import {
   updateTranslationStore,
   cleanupDeletedTexts,
   getExistingTranslations,
-  type TranslationStore,
 } from "./translationTracker";
 
 export interface AutoTranslateConfig {
@@ -25,7 +24,7 @@ export interface AutoTranslateConfig {
  * Automatically translate new or changed texts
  */
 export async function autoTranslate(
-  config: AutoTranslateConfig
+  config: AutoTranslateConfig,
 ): Promise<void> {
   const {
     adapter,
@@ -98,8 +97,8 @@ export async function autoTranslate(
   if (verbose && languagesNeedingTranslation.length > 0) {
     console.log(
       `  🌍 Languages needing translation: ${languagesNeedingTranslation.join(
-        ", "
-      )}`
+        ", ",
+      )}`,
     );
   }
 
@@ -116,7 +115,7 @@ export async function autoTranslate(
     updatedStore = cleanupDeletedTexts(updatedStore, changes.deletedHashes);
     if (verbose) {
       console.log(
-        `\n🗑️  Cleaned up ${changes.deletedHashes.length} deleted texts`
+        `\n🗑️  Cleaned up ${changes.deletedHashes.length} deleted texts`,
       );
     }
     // Save the cleaned store
@@ -133,7 +132,7 @@ export async function autoTranslate(
   if (verbose) {
     if (textsToTranslate.length > 0) {
       console.log(
-        `\n🔄 Translating ${textsToTranslate.length} new/changed texts...`
+        `\n🔄 Translating ${textsToTranslate.length} new/changed texts...`,
       );
     }
   }
@@ -173,7 +172,7 @@ export async function autoTranslate(
       const existingTranslations = getExistingTranslations(
         currentTexts.filter((t) => !textsNeedingTranslation.includes(t)),
         store,
-        targetLang
+        targetLang,
       );
 
       // Build key-value object for API call (use short hash as key)
@@ -191,7 +190,7 @@ export async function autoTranslate(
       const translations = await adapter.translateBatch(
         textsToTranslateObj,
         sourceLang,
-        targetLang
+        targetLang,
       );
 
       // Build translation map
@@ -208,12 +207,12 @@ export async function autoTranslate(
         updatedStore,
         textsNeedingTranslation,
         translationMap,
-        targetLang
+        targetLang,
       );
 
       if (verbose) {
         console.log(
-          `  ✅ Translated ${textsNeedingTranslation.length} texts to ${targetLang}`
+          `  ✅ Translated ${textsNeedingTranslation.length} texts to ${targetLang}`,
         );
       }
 
@@ -221,7 +220,7 @@ export async function autoTranslate(
         onProgress(
           targetLangs.indexOf(targetLang) + 1,
           targetLangs.length,
-          targetLang
+          targetLang,
         );
       }
     } catch (error) {
@@ -244,7 +243,7 @@ export async function autoTranslate(
 export async function exportTranslations(
   storePath: string,
   outputDir: string,
-  targetLangs: string[]
+  targetLangs: string[],
 ): Promise<void> {
   const fs = await import("fs");
   const store = loadTranslationStore(storePath);
