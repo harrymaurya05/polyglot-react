@@ -3,7 +3,10 @@ import react from "@vitejs/plugin-react";
 // Import the plugin from source; cast to `any` to avoid Vite type incompatibilities
 // between different `vite` instances in the root and example workspace.
 import { extractTranslatableText as _extractTranslatableText } from "../../src/plugin";
-import { AWSTranslateAdapter as _AWSTranslateAdapter } from "../../src/adapters";
+import {
+  AWSTranslateAdapter as _AWSTranslateAdapter,
+  PolyglotAPIAdapter,
+} from "../../src/adapters";
 const extractTranslatableText: any = _extractTranslatableText;
 const AWSTranslateAdapter: any = _AWSTranslateAdapter;
 
@@ -27,13 +30,22 @@ export default defineConfig(({ mode }) => {
         // Enable auto-translation - translates only new/changed texts
         autoTranslate: {
           enabled: true,
-          adapter: new AWSTranslateAdapter({
-            region: env.VITE_AWS_REGION || "us-east-1",
-            accessKeyId: env.VITE_AWS_ACCESS_KEY_ID,
-            secretAccessKey: env.VITE_AWS_SECRET_ACCESS_KEY,
+          adapter: new PolyglotAPIAdapter({
+            apiKey: env.VITE_POLYGLOT_API_KEY,
+            baseUrl: env.VITE_POLYGLOT_API_URL,
           }),
           sourceLang: "en",
-          targetLangs: ["es", "fr", "de", "hi", "ja", "zh", "ru", "ur", "en"], // Add your target languages
+          targetLangs: [
+            "es",
+            "fr",
+            "de",
+            "hi",
+            "ja",
+            "zh",
+            "ru",
+            "ur",
+            "fr-CA",
+          ], // Add your target languages
           // Store will be created at src/translations/.translation-store.json
         },
       }),

@@ -1,26 +1,10 @@
 {
   "version": "1.0.0",
   "metadata": {
-    "8f7f4c1ce7a4f933663d10543562b096": {
-      "hash": "8f7f4c1ce7a4f933663d10543562b096",
-      "text": "About",
-      "lastTranslated": 1768579215485,
-      "translations": {
-        "es": "Acerca de",
-        "fr": "À propos",
-        "de": "Über",
-        "hi": "हमारे बारे में",
-        "ja": "について",
-        "zh": "关于",
-        "ru": "О нас",
-        "ur": "کے بارے میں",
-        "en": "About"
-      }
-    },
     "c889a56707e3491f622b5c1188b6096e": {
       "hash": "c889a56707e3491f622b5c1188b6096e",
       "text": "Automatic text extraction",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Extracción automática de texto",
         "fr": "Extraction automatique de texte",
@@ -30,13 +14,14 @@
         "zh": "自动提取文本",
         "ru": "Автоматическое извлечение текста",
         "ur": "خودکار متن نکالنا",
-        "en": "Automatic text extraction"
+        "en": "Automatic text extraction",
+        "fr-CA": "Extraction automatique de texte"
       }
     },
     "3adbdb3ac060038aa0e6e6c138ef9873": {
       "hash": "3adbdb3ac060038aa0e6e6c138ef9873",
       "text": "Category",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Categoría",
         "fr": "Catégorie",
@@ -46,13 +31,14 @@
         "zh": "类别",
         "ru": "Категория",
         "ur": "زمرہ",
-        "en": "Category"
+        "en": "Category",
+        "fr-CA": "Catégorie"
       }
     },
     "bbaff12800505b22a853e8b7f4eb6a22": {
       "hash": "bbaff12800505b22a853e8b7f4eb6a22",
       "text": "Contact",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Contactar",
         "fr": "Contacter",
@@ -62,13 +48,14 @@
         "zh": "联系我们",
         "ru": "Связаться",
         "ur": "رابطہ",
-        "en": "Contact"
+        "en": "Contact",
+        "fr-CA": "Personne-ressource"
       }
     },
     "b5a7adde1af5c87d7fd797b6245c2a39": {
       "hash": "b5a7adde1af5c87d7fd797b6245c2a39",
       "text": "Description",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Descripción",
         "fr": "Descriptif",
@@ -78,13 +65,14 @@
         "zh": "描述",
         "ru": "Описание",
         "ur": "تفصیل",
-        "en": "Description"
+        "en": "Description",
+        "fr-CA": "Descriptif"
       }
     },
     "98f770b0af18ca763421bac22b4b6805": {
       "hash": "98f770b0af18ca763421bac22b4b6805",
       "text": "Features",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Características",
         "fr": "Caractéristiques",
@@ -94,13 +82,14 @@
         "zh": "特征",
         "ru": "Функции",
         "ur": "خصوصیات",
-        "en": "Features"
+        "en": "Features",
+        "fr-CA": "Fonctionnalités"
       }
     },
     "e0c4332e8c13be976552a059f106354f": {
       "hash": "e0c4332e8c13be976552a059f106354f",
       "text": "Get Started",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Comenzar",
         "fr": "Commencez",
@@ -110,29 +99,14 @@
         "zh": "开始吧",
         "ru": "Начните",
         "ur": "شروع کریں",
-        "en": "Get Started"
-      }
-    },
-    "8cf04a9734132302f96da8e113e80ce5": {
-      "hash": "8cf04a9734132302f96da8e113e80ce5",
-      "text": "Home",
-      "lastTranslated": 1768579215485,
-      "translations": {
-        "es": "Inicio",
-        "fr": "Accueil",
-        "de": "Zuhause",
-        "hi": "होम",
-        "ja": "ホーム",
-        "zh": "主页",
-        "ru": "Главная",
-        "ur": "گھر",
-        "en": "Home"
+        "en": "Get Started",
+        "fr-CA": "Commencer"
       }
     },
     "4994a8ffeba4ac3140beb89e8d41f174": {
       "hash": "4994a8ffeba4ac3140beb89e8d41f174",
       "text": "Language",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Idioma",
         "fr": "Langue",
@@ -142,13 +116,14 @@
         "zh": "语言",
         "ru": "Язык",
         "ur": "زبان",
-        "en": "Language"
+        "en": "Language",
+        "fr-CA": "Langue"
       }
     },
     "0885f0c211f74834f0109c5abaf4cdc4": {
       "hash": "0885f0c211f74834f0109c5abaf4cdc4",
       "text": "Language:",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Idioma:",
         "fr": "Langue :",
@@ -158,13 +133,14 @@
         "zh": "语言：",
         "ru": "Язык:",
         "ur": "زبان:",
-        "en": "Language:"
+        "en": "Language:",
+        "fr-CA": "Langue :"
       }
     },
     "8f7f8d9c36c60d4f7ddb6d3e6d7b54b2": {
       "hash": "8f7f8d9c36c60d4f7ddb6d3e6d7b54b2",
       "text": "Latest Technology",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Tecnología más reciente",
         "fr": "Technologie la plus récente",
@@ -174,13 +150,14 @@
         "zh": "最新科技",
         "ru": "Новейшие технологии",
         "ur": "جدید ترین ٹیکنالوجی",
-        "en": "Latest Technology"
+        "en": "Latest Technology",
+        "fr-CA": "Technologie la plus récente"
       }
     },
     "a50e6ce9cfd5a87a5b06e8a13f5b1f0f": {
       "hash": "a50e6ce9cfd5a87a5b06e8a13f5b1f0f",
       "text": "Loading products...",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Cargando productos...",
         "fr": "Chargement des produits...",
@@ -190,13 +167,14 @@
         "zh": "正在加载产品...",
         "ru": "Загрузка продуктов...",
         "ur": "مصنوعات لوڈ کر رہے ہیں...",
-        "en": "Loading products..."
+        "en": "Loading products...",
+        "fr-CA": "Chargement des produits..."
       }
     },
     "8524de963f07201e5c086830d370797f": {
       "hash": "8524de963f07201e5c086830d370797f",
       "text": "Loading...",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Cargando...",
         "fr": "Chargement en cours...",
@@ -206,13 +184,14 @@
         "zh": "加载中...",
         "ru": "Загрузка...",
         "ur": "لوڈ ہو رہا ہے...",
-        "en": "Loading..."
+        "en": "Loading...",
+        "fr-CA": "Chargement..."
       }
     },
     "fe7568eb5a8b184c1aac9b555ddd1172": {
       "hash": "fe7568eb5a8b184c1aac9b555ddd1172",
       "text": "Multiple translation providers",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Varios proveedores de traducción",
         "fr": "Plusieurs fournisseurs de traduction",
@@ -222,13 +201,14 @@
         "zh": "多家翻译提供商",
         "ru": "Несколько поставщиков переводов",
         "ur": "متعدد ترجمہ فراہم کرنے",
-        "en": "Multiple translation providers"
+        "en": "Multiple translation providers",
+        "fr-CA": "Plusieurs fournisseurs de traduction"
       }
     },
     "0a52da7a03a6de3beefe54f8c03ad80d": {
       "hash": "0a52da7a03a6de3beefe54f8c03ad80d",
       "text": "Original",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Original",
         "fr": "Original",
@@ -238,13 +218,14 @@
         "zh": "原创",
         "ru": "Оригинальный",
         "ur": "اصل",
-        "en": "Original"
+        "en": "Original",
+        "fr-CA": "Original"
       }
     },
     "3601146c4e948c32b6424d2c0a7f0118": {
       "hash": "3601146c4e948c32b6424d2c0a7f0118",
       "text": "Price",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Precio",
         "fr": "Prix",
@@ -254,13 +235,14 @@
         "zh": "价格",
         "ru": "Цена",
         "ur": "قیمت",
-        "en": "Price"
+        "en": "Price",
+        "fr-CA": "Prix"
       }
     },
     "deb10517653c255364175796ace3553f": {
       "hash": "deb10517653c255364175796ace3553f",
       "text": "Product",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Producto",
         "fr": "Produit",
@@ -270,13 +252,14 @@
         "zh": "产品",
         "ru": "Изделие",
         "ur": "مصنوعات",
-        "en": "Product"
+        "en": "Product",
+        "fr-CA": "Produit"
       }
     },
     "b0fb76a8f86016ce47ae122bc7d7853e": {
       "hash": "b0fb76a8f86016ce47ae122bc7d7853e",
       "text": "Products from Database",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Productos de la base de datos",
         "fr": "Produits de la base de données",
@@ -286,13 +269,14 @@
         "zh": "来自数据库的产品",
         "ru": "Продукты из базы данных",
         "ur": "ڈیٹا بیس سے مصنوعات",
-        "en": "Products from Database"
+        "en": "Products from Database",
+        "fr-CA": "Produits tirés de la base de données"
       }
     },
     "78b7863da26565d16cb4b961da5d5afe": {
       "hash": "78b7863da26565d16cb4b961da5d5afe",
       "text": "React Translate AI",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "React Translate AI",
         "fr": "React Translate AI",
@@ -302,13 +286,14 @@
         "zh": "React 翻译 AI",
         "ru": "ИИ для перевода React",
         "ur": "React AI کا ترجمہ کریں",
-        "en": "React Translate AI"
+        "en": "React Translate AI",
+        "fr-CA": "Réact Traduire AI"
       }
     },
     "b70cd1aa320faffe55bb2a0b9ba0ffa0": {
       "hash": "b70cd1aa320faffe55bb2a0b9ba0ffa0",
       "text": "Smart caching for offline use",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Almacenamiento en caché inteligente para uso sin conexión",
         "fr": "Mise en cache intelligente pour une utilisation hors ligne",
@@ -318,13 +303,14 @@
         "zh": "智能缓存供离线使用",
         "ru": "Интеллектуальное кэширование для автономного использования",
         "ur": "آف لائن استعمال کے لئے اسمارٹ کیچنگ",
-        "en": "Smart caching for offline use"
+        "en": "Smart caching for offline use",
+        "fr-CA": "Mise en cache intelligente pour une utilisation hors ligne"
       }
     },
     "98e41a731658219d4d2232b2baaaff8f": {
       "hash": "98e41a731658219d4d2232b2baaaff8f",
       "text": "This is an example of automatic AI-powered translation.",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Este es un ejemplo de traducción automática basada en IA.",
         "fr": "Voici un exemple de traduction automatique basée sur l'IA.",
@@ -334,13 +320,14 @@
         "zh": "这是人工智能驱动的自动翻译的示例。",
         "ru": "Это пример автоматического перевода на основе искусственного интеллекта.",
         "ur": "یہ خودکار AI سے چلنے والے ترجمہ کی ایک مثال ہے۔",
-        "en": "This is an example of automatic AI-powered translation."
+        "en": "This is an example of automatic AI-powered translation.",
+        "fr-CA": "Il s'agit d'un exemple de traduction automatique alimentée par l'IA."
       }
     },
     "6dd08874f83507e9c7b23f1a46b7fa7c": {
       "hash": "6dd08874f83507e9c7b23f1a46b7fa7c",
       "text": "Translation",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Traducción",
         "fr": "Traduction",
@@ -350,13 +337,14 @@
         "zh": "翻译",
         "ru": "Перевод",
         "ur": "ترجمہ",
-        "en": "Translation"
+        "en": "Translation",
+        "fr-CA": "Traduction"
       }
     },
     "3ebddc10a13c3786a8ffe3861f031eeb": {
       "hash": "3ebddc10a13c3786a8ffe3861f031eeb",
       "text": "User Comments",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Comentarios de los usuarios",
         "fr": "Commentaires des utilisateurs",
@@ -366,13 +354,14 @@
         "zh": "用户评论",
         "ru": "Комментарии пользователей",
         "ur": "صارف کے تبصرے",
-        "en": "User Comments"
+        "en": "User Comments",
+        "fr-CA": "Commentaires des utilisateurs"
       }
     },
     "83ff551aab7862f3e479013991105cee": {
       "hash": "83ff551aab7862f3e479013991105cee",
       "text": "Welcome to Our App!",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "¡Bienvenido a nuestra aplicación!",
         "fr": "Bienvenue sur notre application !",
@@ -382,13 +371,14 @@
         "zh": "欢迎使用我们的应用程序！",
         "ru": "Добро пожаловать в наше приложение!",
         "ur": "ہماری ایپ میں خوش آمدید!",
-        "en": "Welcome to Our App!"
+        "en": "Welcome to Our App!",
+        "fr-CA": "Bienvenue sur notre application !"
       }
     },
     "3265267c1cc824321940d2ac884c70c1": {
       "hash": "3265267c1cc824321940d2ac884c70c1",
       "text": "Zero maintenance",
-      "lastTranslated": 1768579215485,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "Cero mantenimiento",
         "fr": "Zéro entretien",
@@ -398,13 +388,14 @@
         "zh": "零维护",
         "ru": "Нулевое обслуживание",
         "ur": "زیرو دیکھ بھال",
-        "en": "Zero maintenance"
+        "en": "Zero maintenance",
+        "fr-CA": "Aucun entretien"
       }
     },
     "2563f9201b3ae1cbdc530cee275d3c62": {
       "hash": "2563f9201b3ae1cbdc530cee275d3c62",
       "text": "⚡ Using pre-translated texts (no API calls!)",
-      "lastTranslated": 1768726715870,
+      "lastTranslated": 1769667356720,
       "translations": {
         "es": "⚡ Uso de textos pretraducidos (¡sin llamadas a la API!)",
         "fr": "⚡ Utilisation de textes pré-traduits (pas d'appels d'API !)",
@@ -414,7 +405,104 @@
         "zh": "⚡ 使用预翻译的文本（没有 API 调用！）",
         "ru": "⚡ Использование предварительно переведенных текстов (без вызовов API!)",
         "ur": "⚡ پہلے سے ترجمہ شدہ متن کا استعمال (کوئی API کال نہیں!)",
-        "en": "⚡ Using pre-translated texts (no API calls!)"
+        "en": "⚡ Using pre-translated texts (no API calls!)",
+        "fr-CA": "⚡ Utilisation de textes prétraduits (pas d'appels d'API !)"
+      }
+    },
+    "03c2e7e41ffc181a4e84080b4710e81e": {
+      "hash": "03c2e7e41ffc181a4e84080b4710e81e",
+      "text": "New",
+      "lastTranslated": 1769667356720,
+      "translations": {
+        "es": "Nuevo",
+        "fr": "Nouveau",
+        "de": "Neu",
+        "hi": "नया",
+        "ja": "新規",
+        "zh": "全新",
+        "ru": "Новое",
+        "ur": "نیا",
+        "fr-CA": "Nouveau"
+      }
+    },
+    "35abc00e75de4526ed29b96677b3a17e": {
+      "hash": "35abc00e75de4526ed29b96677b3a17e",
+      "text": "Hello, I would like to test this feature in Montreal, please.",
+      "lastTranslated": 1769668413136,
+      "translations": {
+        "es": "Hola, me gustaría probar esta función en Montreal, por favor.",
+        "fr": "Bonjour, j'aimerais tester cette fonctionnalité à Montréal, s'il vous plaît.",
+        "de": "Hallo, ich möchte diese Funktion bitte in Montreal testen.",
+        "hi": "नमस्कार, मैं मॉन्ट्रियल में इस सुविधा का परीक्षण करना चाहता हूं, कृपया।",
+        "ja": "こんにちは、モントリオールでこの機能をテストしたいのですが。",
+        "zh": "你好，我想在蒙特利尔测试这个功能。",
+        "ru": "Здравствуйте, пожалуйста, я хотел бы протестировать эту функцию в Монреале.",
+        "ur": "ہیلو، میں اس خصوصیت کو مونٹریال میں جانچنا چاہوں گا، براہ کرم.",
+        "fr-CA": "Bonjour, je voudrais tester cette fonctionnalité à Montréal, s'il vous plaît."
+      }
+    },
+    "81b616fbff55b8698d44852f45c08630": {
+      "hash": "81b616fbff55b8698d44852f45c08630",
+      "text": "Christmas",
+      "lastTranslated": 1769668549662,
+      "translations": {
+        "es": "Navidad",
+        "fr": "Noël",
+        "de": "Weihnachten",
+        "hi": "क्रिसमस",
+        "ja": "クリスマス",
+        "zh": "圣诞节",
+        "ru": "рождество",
+        "ur": "کرسمس",
+        "fr-CA": "Noël"
+      }
+    },
+    "41e2fdcd06bbf8daf3bb30baf51c533d": {
+      "hash": "41e2fdcd06bbf8daf3bb30baf51c533d",
+      "text": "March 15, 2026",
+      "lastTranslated": 1769669279939,
+      "translations": {
+        "es": "15 de marzo de 2026",
+        "fr": "15 mars 2026",
+        "de": "15. März 2026",
+        "hi": "15 मार्च 2026",
+        "ja": "2026年3月15日",
+        "zh": "2026年3月15日",
+        "ru": "15 марта 2026 г.",
+        "ur": "15 مارچ، 2026",
+        "fr-CA": "15 mars 2026"
+      }
+    },
+    "292439a34471db1329b80d826b8cdd36": {
+      "hash": "292439a34471db1329b80d826b8cdd36",
+      "text": "$1,234.56",
+      "lastTranslated": 1769669346720,
+      "translations": {
+        "es": "1.234,56$",
+        "fr": "1 234,56$",
+        "de": "1.234,56$",
+        "hi": "$1,234.56",
+        "ja": "1,234.56",
+        "zh": "1,234.56 美元",
+        "ru": "1 234,56",
+        "ur": "ڈالر ۱٫۲۳۴٫۵۶",
+        "fr-CA": "1 234,56$"
+      }
+    },
+    "cbbe2af7db7f398dfdaec3eaa687e8ca": {
+      "hash": "cbbe2af7db7f398dfdaec3eaa687e8ca",
+      "text": "Sandeep",
+      "lastTranslated": 1769680552490,
+      "translations": {
+        "es": "Sandeep",
+        "fr": "Sandeep",
+        "de": "Sandeep",
+        "hi": "संदीप",
+        "ja": "サンディープ",
+        "zh": "桑迪普",
+        "ru": "Сандип",
+        "ur": "سندیپ",
+        "fr-CA": "Sandeep"
       }
     }
   }

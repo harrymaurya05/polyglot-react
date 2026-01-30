@@ -66,6 +66,9 @@ function App() {
         <section className="hero">
           <h2>{t("Welcome to Our App!")}</h2>
           <p>{t("This is an example of automatic AI-powered translation.")}</p>
+          <p>
+            {t("Hello, I would like to test this feature in Montreal, please.")}
+          </p>
           <button>{t("Get Started")}</button>
         </section>
 
