@@ -1,6 +1,6 @@
 # Basic Example - React Translate AI Custom
 
-This example demonstrates the basic usage of @polyglot/react library with **incremental auto-translation**.
+This example demonstrates the basic usage of i18nsolutions library with **incremental auto-translation**.
 
 ## Setup
 

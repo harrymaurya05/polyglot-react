@@ -24,8 +24,8 @@ Incremental translation: Only translate new or changed texts.
 ```typescript
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { extractTranslatableText } from "@polyglot/react/plugin";
-import { PolyglotAPIAdapter } from "@polyglot/react";
+import { extractTranslatableText } from "i18nsolutions/plugin";
+import { PolyglotAPIAdapter } from "i18nsolutions";
 
 export default defineConfig({
   plugins: [

@@ -8,8 +8,8 @@
     "skipLibCheck": true,
     "types": ["vite/client"],
     "paths": {
-      "@polyglot/react": ["../../src"],
-      "@polyglot/react/*": ["../../src/*"]
+      "i18nsolutions": ["../../src"],
+      "i18nsolutions/*": ["../../src/*"]
     }
   },
   "include": ["src/**/*"]

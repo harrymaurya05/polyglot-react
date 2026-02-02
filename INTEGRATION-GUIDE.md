@@ -28,11 +28,11 @@ Complete guide to integrate the AI-powered translation library into your React a
 ## Installation
 
 ```bash
-npm install @polyglot/react
+npm install i18nsolutions
 # or
-yarn add @polyglot/react
+yarn add i18nsolutions
 # or
-pnpm add @polyglot/react
+pnpm add i18nsolutions
 ```
 
 ### Install Translation Provider SDK (if needed)
@@ -57,8 +57,8 @@ Create or update your `vite.config.ts`:
 ```typescript
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
-import { extractTranslatableText } from "@polyglot/react/plugin";
-import { AWSTranslateAdapter } from "@polyglot/react";
+import { extractTranslatableText } from "i18nsolutions/plugin";
+import { AWSTranslateAdapter } from "i18nsolutions";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
@@ -262,7 +262,7 @@ extractTranslatableText({
 ### AWS Translate
 
 ```typescript
-import { AWSTranslateAdapter } from "@polyglot/react";
+import { AWSTranslateAdapter } from "i18nsolutions";
 
 const adapter = new AWSTranslateAdapter({
   region: "us-east-1",
@@ -293,7 +293,7 @@ const adapter = new AWSTranslateAdapter({
 ### Google Translate
 
 ```typescript
-import { GoogleTranslateAdapter } from "@polyglot/react";
+import { GoogleTranslateAdapter } from "i18nsolutions";
 
 const adapter = new GoogleTranslateAdapter(
   process.env.VITE_GOOGLE_TRANSLATE_API_KEY!
@@ -322,7 +322,7 @@ const adapter = new GoogleTranslateAdapter(
 ### DeepL
 
 ```typescript
-import { DeepLAdapter } from "@polyglot/react";
+import { DeepLAdapter } from "i18nsolutions";
 
 const adapter = new DeepLAdapter(process.env.VITE_DEEPL_API_KEY!);
 ```
@@ -347,7 +347,7 @@ const adapter = new DeepLAdapter(process.env.VITE_DEEPL_API_KEY!);
 ### Polyglot API (Self-Hosted)
 
 ```typescript
-import { PolyglotAPIAdapter } from "@polyglot/react";
+import { PolyglotAPIAdapter } from "i18nsolutions";
 
 const adapter = new PolyglotAPIAdapter({
   apiKey: process.env.VITE_POLYGLOT_API_KEY!,

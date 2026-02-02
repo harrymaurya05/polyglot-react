@@ -1,13 +1,13 @@
-# @polyglot/react
+# i18nsolutions
 
 AI-powered automatic translation library for React applications with intelligent caching and zero-maintenance workflow.
 
 ## 📦 Quick Start
 
 ```bash
-npm install @polyglot/react
+npm install i18nsolutions
 # or
-yarn add @polyglot/react
+yarn add i18nsolutions
 ```
 
 ## 🚀 Features
@@ -36,11 +36,11 @@ yarn add @polyglot/react
 ### Step 1: Install the Package
 
 ```bash
-npm install @polyglot/react
+npm install i18nsolutions
 # or
-yarn add @polyglot/react
+yarn add i18nsolutions
 # or
-pnpm add @polyglot/react
+pnpm add i18nsolutions
 ```
 
 ### Step 2: Configure Build Plugin
@@ -54,7 +54,7 @@ Update your [vite.config.js](vite.config.js) or [vite.config.ts](vite.config.ts)
 ```js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { extractTranslatableText } from "@polyglot/react/plugin";
+import { extractTranslatableText } from "i18nsolutions/plugin";
 
 export default defineConfig({
   plugins: [
@@ -81,7 +81,7 @@ npm install @craco/craco
 Create [craco.config.js](craco.config.js):
 
 ```js
-const { extractTranslatableText } = require("@polyglot/react/plugin");
+const { extractTranslatableText } = require("i18nsolutions/plugin");
 
 module.exports = {
   webpack: {
@@ -173,7 +173,7 @@ Update your main app file (usually [src/App.jsx](src/App.jsx) or [src/main.jsx](
 
 ```jsx
 import React from "react";
-import { TranslateProvider, createTranslator } from "@polyglot/react";
+import { TranslateProvider, createTranslator } from "i18nsolutions";
 import textsToTranslate from "./translations/texts.json";
 
 // Create translator instance
@@ -237,7 +237,7 @@ function Header() {
 **After:**
 
 ```jsx
-import { useTranslate } from "@polyglot/react";
+import { useTranslate } from "i18nsolutions";
 
 function Header() {
   const t = useTranslate();
@@ -257,7 +257,7 @@ function Header() {
 Create a language selector component:
 
 ```jsx
-import { useTranslator } from "@polyglot/react";
+import { useTranslator } from "i18nsolutions";
 
 function LanguageSwitcher() {
   const { changeLanguage, currentLang, isLoading } = useTranslator();
@@ -300,7 +300,7 @@ That's it! Your app now supports automatic translation with intelligent caching.
 
 ## 📋 Complete Integration Checklist
 
-- [ ] Install `@polyglot/react` package
+- [ ] Install `i18nsolutions` package
 - [ ] Configure build plugin in vite.config.js (or CRACO for CRA)
 - [ ] Get translation API key from your chosen provider
 - [ ] Create .env file with API credentials
@@ -408,8 +408,8 @@ extractTranslatableText({
 Simple, purpose-built for this library with no complex setup.
 
 ```jsx
-import { createTranslator } from "@polyglot/react";
-import { PolyglotAPIAdapter } from "@polyglot/react";
+import { createTranslator } from "i18nsolutions";
+import { PolyglotAPIAdapter } from "i18nsolutions";
 
 const translator = createTranslator({
   provider: "polyglot",
@@ -427,7 +427,7 @@ const translator = createTranslator({
 Professional translation with wide language support.
 
 ```jsx
-import { createTranslator } from "@polyglot/react";
+import { createTranslator } from "i18nsolutions";
 
 const translator = createTranslator({
   provider: "google",
@@ -451,7 +451,7 @@ const translator = createTranslator({
 Premium translation quality, ideal for professional content.
 
 ```jsx
-import { createTranslator } from "@polyglot/react";
+import { createTranslator } from "i18nsolutions";
 
 const translator = createTranslator({
   provider: "deepl",
@@ -469,7 +469,7 @@ const translator = createTranslator({
 Enterprise-grade translation with AWS infrastructure.
 
 ```jsx
-import { createTranslator } from "@polyglot/react";
+import { createTranslator } from "i18nsolutions";
 
 const translator = createTranslator({
   provider: "aws",
@@ -489,7 +489,7 @@ const translator = createTranslator({
 Use your own translation service.
 
 ```jsx
-import { createTranslator } from "@polyglot/react";
+import { createTranslator } from "i18nsolutions";
 
 const translator = createTranslator({
   provider: "custom",
@@ -531,7 +531,7 @@ And return:
 For user-generated content or API data not in your source code:
 
 ```jsx
-import { useTranslateDynamic } from "@polyglot/react";
+import { useTranslateDynamic } from "i18nsolutions";
 
 function UserComment({ comment }) {
   const translateDynamic = useTranslateDynamic();
@@ -548,7 +548,7 @@ function UserComment({ comment }) {
 ### Variables in Translations
 
 ```jsx
-import { useTranslate } from "@polyglot/react";
+import { useTranslate } from "i18nsolutions";
 
 function Welcome({ username }) {
   const t = useTranslate();
@@ -561,7 +561,7 @@ function Welcome({ username }) {
 ### Pluralization Support
 
 ```jsx
-import { useTranslate } from "@polyglot/react";
+import { useTranslate } from "i18nsolutions";
 
 function ItemCount({ count }) {
   const t = useTranslate();
@@ -578,7 +578,7 @@ function ItemCount({ count }) {
 ### Date and Number Formatting
 
 ```jsx
-import { useFormat } from "@polyglot/react";
+import { useFormat } from "i18nsolutions";
 
 function Invoice({ amount, date }) {
   const { formatCurrency, formatDate } = useFormat();
@@ -595,7 +595,7 @@ function Invoice({ amount, date }) {
 ### Loading States
 
 ```jsx
-import { useTranslator } from "@polyglot/react";
+import { useTranslator } from "i18nsolutions";
 
 function App() {
   const { isLoading, error } = useTranslator();
@@ -615,7 +615,7 @@ function App() {
 ### Programmatic Language Change
 
 ```jsx
-import { useTranslator } from "@polyglot/react";
+import { useTranslator } from "i18nsolutions";
 
 function Settings() {
   const { changeLanguage, currentLang, availableLanguages } = useTranslator();
@@ -653,8 +653,8 @@ Save 90-99% on translation costs by only translating new or changed texts.
 
 ```js
 // vite.config.js
-import { extractTranslatableText } from "@polyglot/react/plugin";
-import { PolyglotAPIAdapter } from "@polyglot/react";
+import { extractTranslatableText } from "i18nsolutions/plugin";
+import { PolyglotAPIAdapter } from "i18nsolutions";
 
 export default defineConfig({
   plugins: [
@@ -733,7 +733,7 @@ const translator = createTranslator({
 ### Clear Cache
 
 ```jsx
-import { useTranslator } from "@polyglot/react";
+import { useTranslator } from "i18nsolutions";
 
 function Settings() {
   const { clearCache } = useTranslator();
@@ -748,7 +748,7 @@ function Settings() {
 
 ```jsx
 import { render, screen } from "@testing-library/react";
-import { MockTranslateProvider } from "@polyglot/react/testing";
+import { MockTranslateProvider } from "i18nsolutions/testing";
 import Header from "./Header";
 
 test("renders translated welcome message", () => {
@@ -771,7 +771,7 @@ test("renders translated welcome message", () => {
 
 ```jsx
 import { render, screen, fireEvent } from "@testing-library/react";
-import { MockTranslateProvider } from "@polyglot/react/testing";
+import { MockTranslateProvider } from "i18nsolutions/testing";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 test("switches language", async () => {
@@ -798,7 +798,7 @@ test("switches language", async () => {
 Cost: ~$60/day
 ```
 
-### With @polyglot/react
+### With i18nsolutions
 
 ```
 1 API call per language per session × 30 users = 30 API calls/day
@@ -862,7 +862,7 @@ Check your provider's documentation for the complete list.
 
 **Solution:**
 
-- Update to latest version: `npm install @polyglot/react@latest`
+- Update to latest version: `npm install i18nsolutions@latest`
 - Check Vite version compatibility (requires Vite 4+)
 - Verify plugin configuration syntax
 - Check for conflicting plugins
@@ -886,8 +886,8 @@ import { useTranslation } from "react-i18next";
 const { t } = useTranslation();
 t("welcome.message");
 
-// After (@polyglot/react)
-import { useTranslate } from "@polyglot/react";
+// After (i18nsolutions)
+import { useTranslate } from "i18nsolutions";
 const t = useTranslate();
 t("Welcome message");
 ```
@@ -899,8 +899,8 @@ t("Welcome message");
 import { FormattedMessage } from "react-intl";
 <FormattedMessage id="welcome" defaultMessage="Welcome" />;
 
-// After (@polyglot/react)
-import { useTranslate } from "@polyglot/react";
+// After (i18nsolutions)
+import { useTranslate } from "i18nsolutions";
 const t = useTranslate();
 {
   t("Welcome");
@@ -974,452 +974,6 @@ Mock provider for tests.
 </MockTranslateProvider>
 ```
 
-## 📦 Publishing to NPM
-
-This guide is for maintainers who want to publish this library to npm.
-
-### Prerequisites
-
-- Node.js 14+ installed
-- npm account (create at https://www.npmjs.com)
-- Write access to the npm package (for existing packages)
-- Git repository set up
-
-### Step 1: Prepare Your Package
-
-#### 1.1 Update package.json
-
-Ensure your [package.json](package.json) has all required fields:
-
-```json
-{
-  "name": "@polyglot/react",
-  "version": "1.0.0",
-  "description": "AI-powered automatic translation library for React",
-  "author": "Your Name <your.email@example.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yourusername/polyglot-react.git"
-  },
-  "bugs": {
-    "url": "https://github.com/yourusername/polyglot-react/issues"
-  },
-  "homepage": "https://github.com/yourusername/polyglot-react#readme",
-  "keywords": [
-    "react",
-    "translation",
-    "i18n",
-    "internationalization",
-    "ai"
-  ],
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ],
-  "publishConfig": {
-    "access": "public"
-  }
-}
-```
-
-#### 1.2 Create/Update LICENSE
-
-Add a LICENSE file if you don't have one:
-
-```bash
-# MIT License is recommended for open source
-cat > LICENSE << 'EOF'
-MIT License
-
-Copyright (c) 2025 Your Name
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-EOF
-```
-
-#### 1.3 Create .npmignore (Optional)
-
-If you want more control than `files` in package.json:
-
-```bash
-cat > .npmignore << 'EOF'
-# Source files
-src/
-examples/
-scripts/
-
-# Configuration files
-.env
-.env.*
-*.config.js
-*.config.ts
-tsconfig.json
-
-# Development files
-.vscode/
-.idea/
-*.test.ts
-*.test.tsx
-*.spec.ts
-*.spec.tsx
-
-# Documentation (keep only README)
-docs/
-*.md
-!README.md
-
-# Build artifacts
-node_modules/
-.DS_Store
-*.log
-coverage/
-.nyc_output/
-
-# Git files
-.git/
-.gitignore
-.gitattributes
-EOF
-```
-
-### Step 2: Build the Package
-
-```bash
-# Install dependencies
-npm install
-
-# Run tests (if available)
-npm test
-
-# Type check
-npm run type-check
-
-# Lint code
-npm run lint
-
-# Build the distributable
-npm run build
-```
-
-Verify the `dist/` directory is created with:
-- `index.js` (CommonJS)
-- `index.mjs` (ES Module)
-- `index.d.ts` (TypeScript types)
-- Plugin files
-- Testing utilities
-
-### Step 3: Version Your Package
-
-Use semantic versioning (MAJOR.MINOR.PATCH):
-
-```bash
-# For bug fixes (1.0.0 → 1.0.1)
-npm version patch
-
-# For new features (1.0.0 → 1.1.0)
-npm version minor
-
-# For breaking changes (1.0.0 → 2.0.0)
-npm version major
-
-# Or set specific version
-npm version 1.2.3
-```
-
-This will:
-- Update version in package.json
-- Create a git commit
-- Create a git tag
-
-### Step 4: Test Package Locally
-
-Before publishing, test your package locally:
-
-```bash
-# Create a tarball
-npm pack
-
-# This creates a file like: polyglot-react-1.0.0.tgz
-```
-
-Test in another project:
-
-```bash
-cd /path/to/test-project
-npm install /path/to/polyglot-react/polyglot-react-1.0.0.tgz
-```
-
-Or use npm link:
-
-```bash
-# In your package directory
-npm link
-
-# In your test project
-cd /path/to/test-project
-npm link @polyglot/react
-```
-
-### Step 5: Login to npm
-
-```bash
-npm login
-```
-
-You'll be prompted for:
-- Username
-- Password
-- Email (this will be public)
-- One-time password (if 2FA is enabled)
-
-Verify login:
-
-```bash
-npm whoami
-```
-
-### Step 6: Publish to npm
-
-#### First Time Publishing
-
-```bash
-# Publish as public (for scoped packages like @polyglot/react)
-npm publish --access public
-```
-
-#### Publishing Updates
-
-```bash
-# Regular publish (after npm version)
-npm publish
-
-# Or publish with tag (for beta, next, etc.)
-npm publish --tag beta
-npm publish --tag next
-```
-
-#### Dry Run (Test Without Publishing)
-
-```bash
-npm publish --dry-run
-```
-
-This shows what will be published without actually publishing.
-
-### Step 7: Verify Publication
-
-Check your package on npm:
-
-```bash
-# View package info
-npm view @polyglot/react
-
-# Test installation
-npm install @polyglot/react
-```
-
-Visit your package page:
-```
-https://www.npmjs.com/package/@polyglot/react
-```
-
-### Step 8: Push to Git
-
-```bash
-# Push commits and tags
-git push origin main
-git push origin --tags
-```
-
-### Complete Publishing Checklist
-
-- [ ] Update version in package.json
-- [ ] Update CHANGELOG.md (if applicable)
-- [ ] Run all tests and ensure they pass
-- [ ] Build the package (`npm run build`)
-- [ ] Test package locally with `npm pack` or `npm link`
-- [ ] Commit all changes
-- [ ] Create version tag (`npm version`)
-- [ ] Login to npm (`npm login`)
-- [ ] Publish to npm (`npm publish --access public`)
-- [ ] Verify package on npmjs.com
-- [ ] Push to git repository with tags
-- [ ] Create GitHub release (optional)
-- [ ] Announce on social media/Discord (optional)
-
-## 🔄 Publishing Workflow (Recommended)
-
-### Automated Publishing with GitHub Actions
-
-Create `.github/workflows/publish.yml`:
-
-```yaml
-name: Publish to npm
-
-on:
-  release:
-    types: [created]
-
-jobs:
-  publish:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          registry-url: 'https://registry.npmjs.org'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Run tests
-        run: npm test
-      
-      - name: Build package
-        run: npm run build
-      
-      - name: Publish to npm
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-```
-
-#### Setup:
-
-1. Create npm access token:
-   - Go to https://www.npmjs.com/settings/[username]/tokens
-   - Click "Generate New Token" → "Automation"
-   - Copy the token
-
-2. Add to GitHub Secrets:
-   - Go to your repo → Settings → Secrets and variables → Actions
-   - Click "New repository secret"
-   - Name: `NPM_TOKEN`
-   - Value: [paste your token]
-
-3. Create a release on GitHub:
-   ```bash
-   git tag v1.0.0
-   git push origin v1.0.0
-   ```
-   Then create a release from the tag on GitHub, and the package will auto-publish!
-
-## 🚨 Common Publishing Issues
-
-### Issue: "You must sign up for private packages"
-
-**Solution:** Add to package.json:
-```json
-{
-  "publishConfig": {
-    "access": "public"
-  }
-}
-```
-
-### Issue: "Package name already exists"
-
-**Solution:** 
-- Choose a different name, or
-- Use a scope: `@yourusername/package-name`
-- Request package name if abandoned
-
-### Issue: "You do not have permission to publish"
-
-**Solution:**
-- Check you're logged in: `npm whoami`
-- Verify you own the package or are a collaborator
-- Check organization permissions for scoped packages
-
-### Issue: "No README data"
-
-**Solution:** Ensure README.md is included in `files` array or not in .npmignore
-
-### Issue: "Missing main field"
-
-**Solution:** Ensure package.json has:
-```json
-{
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts"
-}
-```
-
-## 📊 Post-Publishing Best Practices
-
-### 1. Monitor Downloads
-
-Track package stats:
-- npm downloads: https://npm-stat.com/
-- GitHub stars and forks
-- Issues and pull requests
-
-### 2. Maintain Package
-
-- Respond to issues promptly
-- Review and merge pull requests
-- Keep dependencies updated
-- Publish security patches quickly
-
-### 3. Semantic Versioning
-
-Follow semver strictly:
-- **Patch** (1.0.x): Bug fixes
-- **Minor** (1.x.0): New features (backward compatible)
-- **Major** (x.0.0): Breaking changes
-
-### 4. Keep CHANGELOG
-
-Update CHANGELOG.md for each version:
-
-```markdown
-# Changelog
-
-## [1.2.0] - 2025-02-03
-### Added
-- Support for custom translation providers
-- New `useFormat` hook for date/number formatting
-
-### Fixed
-- Cache invalidation bug in Safari
-- TypeScript types for plugin options
-
-## [1.1.0] - 2025-01-15
-### Added
-- Incremental translation support
-- IndexedDB cache option
-```
-
-### 5. Documentation
-
-Keep documentation updated:
-- README.md
-- API documentation
-- Migration guides
-- Examples
-
 ## 🤝 Contributing
 
 Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md).
@@ -1435,7 +989,7 @@ MIT © 2025
 - 🔄 [Incremental Translation Guide](./INCREMENTAL-TRANSLATION.md)
 - 🔌 [Integration Guide](./INTEGRATION-GUIDE.md)
 - 🌐 [Polyglot API Guide](./POLYGLOT-API-GUIDE.md)
-- 💬 [GitHub Issues](https://github.com/yourusername/polyglot-react/issues)
+- 💬 [GitHub Issues](https://github.com/yourusername/i18nsolutions/issues)
 - 📧 Email: support@usepolyglot.dev
 
 ## 🗺️ Roadmap
@@ -1451,7 +1005,7 @@ MIT © 2025
 - [ ] Translation management dashboard
 - [ ] A/B testing for translations
 
-## 💡 Why Choose @polyglot/react?
+## 💡 Why Choose i18nsolutions?
 
 ### vs Chrome's Built-in Translator
 

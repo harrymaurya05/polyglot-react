@@ -4,13 +4,13 @@
 
 ### 1. Change Library Name
 
-- [x] Decide on new name ✅ **@polyglot/react**
+- [x] Decide on new name ✅ **i18nsolutions**
 - [x] Update `package.json` name field
 - [x] Update all imports in example app
 - [x] Update README.md with new name
 - [x] Update documentation files (CONTEXT, PROMPT, etc.)
 - [x] Search & replace in all source files
-- [x] Update GitHub repository name ✅ **polyglot-react**
+- [x] Update GitHub repository name ✅ **i18nsolutions**
 - [ ] Reserve npm package name (run `npm login` then `npm publish`)
 
 **Files updated:**
@@ -21,7 +21,7 @@
 - ✅ `examples/basic-example/package.json`
 - ✅ All documentation files
 - ✅ All TypeScript source files
-- ✅ GitHub repo renamed to `polyglot-react`
+- ✅ GitHub repo renamed to `i18nsolutions`
 
 ---
 

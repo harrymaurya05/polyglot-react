@@ -1,8 +1,8 @@
-# Prompt for Building @polyglot/react Library
+# Prompt for Building i18nsolutions Library
 
 ## Project Overview
 
-Create a React library called `@polyglot/react` that provides automatic AI-powered translation with intelligent caching and zero-maintenance workflow. The library should eliminate the need for developers to manually maintain translation JSON files.
+Create a React library called `i18nsolutions` that provides automatic AI-powered translation with intelligent caching and zero-maintenance workflow. The library should eliminate the need for developers to manually maintain translation JSON files.
 
 ## Core Concept
 
@@ -303,7 +303,7 @@ function getCacheKey(targetLang, textsHash, appVersion) {
 ## Project Structure
 
 ```
-@polyglot/react/
+i18nsolutions/
 ├── src/
 │   ├── core/
 │   │   ├── createTranslator.ts

@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Create a production-ready Spring Boot REST API that serves as a translation backend for the `@polyglot/react` library. The API will use AWS Translate for translations, implement intelligent caching with Redis, track usage for billing, and provide API key authentication.
+Create a production-ready Spring Boot REST API that serves as a translation backend for the `i18nsolutions` library. The API will use AWS Translate for translations, implement intelligent caching with Redis, track usage for billing, and provide API key authentication.
 
 ## Tech Stack
 
@@ -501,7 +501,7 @@ INSERT INTO users (email, api_key, plan, usage_limit, reset_date) VALUES
 
 **npm Packages:**
 
-- `@polyglot/react` - React library (current)
+- `i18nsolutions` - React library (current)
 - `@polyglot/native` - React Native (future)
 - `@polyglot/vue` - Vue.js (future)
 - `@polyglot/angular` - Angular (future)

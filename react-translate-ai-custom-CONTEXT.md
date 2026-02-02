@@ -2,7 +2,7 @@
 
 ## 📋 Project Summary
 
-Building `@polyglot/react` - an AI-powered React translation library with automatic text extraction, smart caching, and zero-maintenance workflow.
+Building `i18nsolutions` - an AI-powered React translation library with automatic text extraction, smart caching, and zero-maintenance workflow.
 
 ## 🎯 Core Problem Solved
 
@@ -110,7 +110,7 @@ App Startup → Read texts.json → Batch translate → Cache → Serve instantl
 
 ```jsx
 // vite.config.js
-import { extractTranslatableText } from "@polyglot/react/plugin";
+import { extractTranslatableText } from "i18nsolutions/plugin";
 
 export default {
   plugins: [
@@ -122,7 +122,7 @@ export default {
 };
 
 // App.jsx
-import { TranslateProvider, createTranslator } from "@polyglot/react";
+import { TranslateProvider, createTranslator } from "i18nsolutions";
 import texts from "./translations/texts.json";
 
 const translator = createTranslator({
@@ -142,7 +142,7 @@ function App() {
 }
 
 // Component.jsx
-import { useTranslate } from "@polyglot/react";
+import { useTranslate } from "i18nsolutions";
 
 function Header() {
   const t = useTranslate();
@@ -168,8 +168,8 @@ function Header() {
 
 ## 📝 Related Files
 
-- `@polyglot/react-README.md` - Full documentation
-- `@polyglot/react-PROMPT.md` - LLM implementation prompt
+- `i18nsolutions-README.md` - Full documentation
+- `i18nsolutions-PROMPT.md` - LLM implementation prompt
 
 ## 💡 Key Insights
 
@@ -196,7 +196,7 @@ Create a **platform-agnostic translation ecosystem** where the backend API is th
 
 **Platform-Specific SDKs (Free/MIT):**
 
-1. **✅ @polyglot/react** (Current - Web)
+1. **✅ i18nsolutions** (Current - Web)
 
    - Status: Built and working
    - React web apps with Vite plugin

@@ -2,7 +2,7 @@
 
 ## 🎉 Project Successfully Created!
 
-The `@polyglot/react` library has been fully implemented with all core features.
+The `i18nsolutions` library has been fully implemented with all core features.
 
 ## 📦 What Was Built
 
@@ -121,7 +121,7 @@ The `@polyglot/react` library has been fully implemented with all core features.
 ## 📋 Project Structure
 
 ```
-@polyglot/react/
+i18nsolutions/
 ├── src/
 │   ├── adapters/          # Translation providers
 │   ├── cache/             # Cache implementations

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-translate": "^3.970.0",
-    "@polyglot/react": "file:../..",
+    "i18nsolutions": "file:../..",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

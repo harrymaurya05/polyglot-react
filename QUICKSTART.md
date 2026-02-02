@@ -1,13 +1,13 @@
-# Quick Start Guide - @polyglot/react
+# Quick Start Guide - i18nsolutions
 
 Get started in 5 minutes! ⚡
 
 ## Step 1: Install the Library
 
 ```bash
-npm install @polyglot/react
+npm install i18nsolutions
 # or
-yarn add @polyglot/react
+yarn add i18nsolutions
 ```
 
 ## Step 2: Configure Vite Plugin
@@ -17,7 +17,7 @@ Add the plugin to your `vite.config.ts`:
 ```typescript
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { extractTranslatableText } from "@polyglot/react/plugin";
+import { extractTranslatableText } from "i18nsolutions/plugin";
 
 export default defineConfig({
   plugins: [
@@ -66,7 +66,7 @@ VITE_TRANSLATE_API_KEY=your_api_key_here
 Update your `App.tsx`:
 
 ```tsx
-import { TranslateProvider, createTranslator } from "@polyglot/react";
+import { TranslateProvider, createTranslator } from "i18nsolutions";
 import textsToTranslate from "./translations/texts.json";
 
 const translator = createTranslator({
@@ -94,7 +94,7 @@ function App() {
 ## Step 6: Use in Components
 
 ```tsx
-import { useTranslate } from "@polyglot/react";
+import { useTranslate } from "i18nsolutions";
 
 function MyComponent() {
   const t = useTranslate();
@@ -120,7 +120,7 @@ That's it! Your app now has automatic AI-powered translation! 🎉
 ## Optional: Add Language Switcher
 
 ```tsx
-import { useTranslator } from "@polyglot/react";
+import { useTranslator } from "i18nsolutions";
 
 function LanguageSwitcher() {
   const { changeLanguage, currentLang, isLoading } = useTranslator();
@@ -199,8 +199,8 @@ Over 100+ languages supported including:
 ## Need Help?
 
 - 📖 [Full Documentation](./README.md)
-- 💬 [GitHub Discussions](https://github.com/yourusername/@polyglot/react/discussions)
-- 🐛 [Report Issues](https://github.com/yourusername/@polyglot/react/issues)
+- 💬 [GitHub Discussions](https://github.com/yourusername/i18nsolutions/discussions)
+- 🐛 [Report Issues](https://github.com/yourusername/i18nsolutions/issues)
 
 ---
 

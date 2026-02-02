@@ -1,0 +1,40 @@
+# Source files
+src/
+examples/
+
+# Config files
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
+.eslintrc.cjs
+
+# Documentation (keep only README.md and LICENSE)
+*.md
+!README.md
+CHANGELOG.md
+BUILD_SUMMARY.md
+CONTRIBUTING.md
+TODO.md
+QUICKSTART.md
+INTEGRATION-GUIDE.md
+POLYGLOT-API-GUIDE.md
+QUICK-START-AUTO-TRANSLATE.md
+API-FORMAT-EXAMPLE.md
+BACKEND_PROMPT.md
+INCREMENTAL-TRANSLATION.md
+INCREMENTAL-TRANSLATION-SUMMARY.md
+RENAME_SUMMARY.md
+react-translate-ai-custom-*.md
+
+# Scripts
+scripts/
+setup.sh
+
+# Git
+.git/
+.github/
+.gitignore
+
+# Misc
+node_modules/
+examples-basic-example-env.example

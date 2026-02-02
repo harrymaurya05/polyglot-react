@@ -102,8 +102,8 @@ Savings: 99% reduction in API calls
 ### With Vite Plugin
 
 ```typescript
-import { extractTranslatableText } from "@polyglot/react/plugin";
-import { PolyglotAPIAdapter } from "@polyglot/react";
+import { extractTranslatableText } from "i18nsolutions/plugin";
+import { PolyglotAPIAdapter } from "i18nsolutions";
 
 extractTranslatableText({
   include: ["src/**/*.{jsx,tsx}"],
@@ -120,7 +120,7 @@ extractTranslatableText({
 ### Standalone Script
 
 ```typescript
-import { autoTranslate } from "@polyglot/react/plugin";
+import { autoTranslate } from "i18nsolutions/plugin";
 
 await autoTranslate({
   adapter: new PolyglotAPIAdapter(apiKey),

@@ -1,6 +1,6 @@
-# @polyglot/react Examples
+# i18nsolutions Examples
 
-This directory contains example implementations of the @polyglot/react library.
+This directory contains example implementations of the i18nsolutions library.
 
 ## Basic Usage Example
 

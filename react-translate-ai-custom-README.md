@@ -1,4 +1,4 @@
-# @polyglot/react
+# i18nsolutions
 
 AI-powered automatic translation library for React applications with intelligent caching and zero-maintenance workflow.
 
@@ -77,9 +77,9 @@ Your Lib: Visit site → Auto-detect Hindi preference → Show Hindi → Perfect
 ## 📦 Installation
 
 ```bash
-npm install @polyglot/react
+npm install i18nsolutions
 # or
-yarn add @polyglot/react
+yarn add i18nsolutions
 ```
 
 ## 🔧 Setup
@@ -90,7 +90,7 @@ yarn add @polyglot/react
 // vite.config.js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { extractTranslatableText } from "@polyglot/react/plugin";
+import { extractTranslatableText } from "i18nsolutions/plugin";
 
 export default defineConfig({
   plugins: [
@@ -108,7 +108,7 @@ export default defineConfig({
 
 ```jsx
 // src/App.jsx
-import { TranslateProvider, createTranslator } from "@polyglot/react";
+import { TranslateProvider, createTranslator } from "i18nsolutions";
 import textsToTranslate from "./translations/texts.json";
 
 const translator = createTranslator({
@@ -150,7 +150,7 @@ export default App;
 ### 3. Use Translations in Components
 
 ```jsx
-import { useTranslate } from "@polyglot/react";
+import { useTranslate } from "i18nsolutions";
 
 function Header() {
   const t = useTranslate();
@@ -194,7 +194,7 @@ function Header() {
 ## 🌍 Dynamic Language Switching
 
 ```jsx
-import { useTranslator } from "@polyglot/react";
+import { useTranslator } from "i18nsolutions";
 
 function LanguageSwitcher() {
   const { changeLanguage, currentLang, isLoading } = useTranslator();
@@ -289,7 +289,7 @@ cache: {
 For user-generated or API content that isn't in your source code:
 
 ```jsx
-import { useTranslateDynamic } from "@polyglot/react";
+import { useTranslateDynamic } from "i18nsolutions";
 
 function UserComment({ comment }) {
   const translateDynamic = useTranslateDynamic();
@@ -345,7 +345,7 @@ VITE_DEFAULT_LANGUAGE=en
 Mock translations in tests:
 
 ```jsx
-import { MockTranslateProvider } from "@polyglot/react/testing";
+import { MockTranslateProvider } from "i18nsolutions/testing";
 
 test("renders welcome message", () => {
   render(
@@ -421,7 +421,7 @@ MIT © 2025
 
 ## 🙋 Support
 
-- 📧 Email: support@@polyglot/react.com
+- 📧 Email: support@i18nsolutions.com
 - 💬 Discord: [Join our community](#)
 - 🐛 Issues: [GitHub Issues](#)
 

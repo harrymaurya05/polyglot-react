@@ -30,8 +30,8 @@ Add auto-translation to your `vite.config.ts`:
 ```typescript
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { extractTranslatableText } from "@polyglot/react/plugin";
-import { PolyglotAPIAdapter } from "@polyglot/react";
+import { extractTranslatableText } from "i18nsolutions/plugin";
+import { PolyglotAPIAdapter } from "i18nsolutions";
 
 export default defineConfig({
   plugins: [
@@ -59,8 +59,8 @@ export default defineConfig({
 You can also use the auto-translation service directly:
 
 ```typescript
-import { autoTranslate } from "@polyglot/react/plugin";
-import { PolyglotAPIAdapter } from "@polyglot/react";
+import { autoTranslate } from "i18nsolutions/plugin";
+import { PolyglotAPIAdapter } from "i18nsolutions";
 
 const adapter = new PolyglotAPIAdapter("your-api-key");
 
@@ -256,7 +256,7 @@ You fix a typo: `"Welcme"` → `"Welcome"`
 Export translations to separate language files:
 
 ```typescript
-import { exportTranslations } from "@polyglot/react/plugin";
+import { exportTranslations } from "i18nsolutions/plugin";
 
 exportTranslations(
   "./src/translations/.translation-store.json",
@@ -349,7 +349,7 @@ import {
   loadTranslationStore,
   saveTranslationStore,
   detectChanges,
-} from "@polyglot/react/plugin";
+} from "i18nsolutions/plugin";
 
 // Load store
 const store = loadTranslationStore("./store.json");
@@ -376,8 +376,8 @@ await autoTranslate({
 Create `scripts/translate.js`:
 
 ```javascript
-import { autoTranslate } from "@polyglot/react/plugin";
-import { PolyglotAPIAdapter } from "@polyglot/react";
+import { autoTranslate } from "i18nsolutions/plugin";
+import { PolyglotAPIAdapter } from "i18nsolutions";
 
 const adapter = new PolyglotAPIAdapter(process.env.POLYGLOT_API_KEY);
 

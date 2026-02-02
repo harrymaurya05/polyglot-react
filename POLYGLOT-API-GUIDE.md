@@ -16,7 +16,7 @@ The **Polyglot API Adapter** is the official adapter for connecting to the usepo
 ## Installation
 
 ```bash
-npm install @polyglot/react
+npm install i18nsolutions
 ```
 
 ## Quick Start
@@ -28,7 +28,7 @@ Sign up at [usepolyglot.dev](https://usepolyglot.dev) to get your API key.
 ### 2. Simple Usage (API Key Only)
 
 ```tsx
-import { createTranslator, TranslateProvider } from "@polyglot/react";
+import { createTranslator, TranslateProvider } from "i18nsolutions";
 import textsToTranslate from "./translations/texts.json";
 
 const translator = createTranslator({
@@ -231,7 +231,7 @@ import {
   createTranslator,
   useTranslate,
   useTranslateDynamic,
-} from "@polyglot/react";
+} from "i18nsolutions";
 import textsToTranslate from "./translations/texts.json";
 
 // Create translator with Polyglot API
@@ -302,7 +302,7 @@ Visit [usepolyglot.dev/pricing](https://usepolyglot.dev/pricing) for current pri
 Full TypeScript support included:
 
 ```tsx
-import type { PolyglotAPIAdapterOptions } from "@polyglot/react";
+import type { PolyglotAPIAdapterOptions } from "i18nsolutions";
 
 const options: PolyglotAPIAdapterOptions = {
   apiKey: "your_key",

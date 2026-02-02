@@ -1,5 +1,5 @@
 {
-  "name": "@polyglot/react",
+  "name": "i18nsolutions",
   "version": "1.0.0",
   "description": "AI-powered automatic translation library for React with intelligent caching and zero-maintenance workflow",
   "main": "dist/index.js",
@@ -51,19 +51,19 @@
     "deepl",
     "aws-translate"
   ],
-  "author": "Your Name",
+  "author": "Harry Maurya <harrymaurya05@gmail.com> (https://github.com/harrymaurya05)",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/harrymaurya05/polyglot-react.git"
+    "url": "git+https://github.com/harrymaurya05/i18nsolutions.git"
   },
   "bugs": {
-    "url": "https://github.com/harrymaurya05/polyglot-react/issues"
+    "url": "https://github.com/harrymaurya05/i18nsolutions/issues"
   },
-  "homepage": "https://github.com/harrymaurya05/polyglot-react#readme",
+  "homepage": "https://github.com/harrymaurya05/i18nsolutions#readme",
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"

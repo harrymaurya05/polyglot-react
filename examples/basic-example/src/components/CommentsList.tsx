@@ -1,5 +1,5 @@
 import React from "react";
-import { useTranslateDynamic, useTranslate } from "@polyglot/react";
+import { useTranslateDynamic, useTranslate } from "i18nsolutions";
 
 interface Comment {
   id: number;
