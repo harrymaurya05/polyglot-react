@@ -68,17 +68,17 @@ class TranslatorImpl implements Translator {
       case "polyglot":
         if (!this.config.polyglotAPIOptions && !this.config.apiKey) {
           throw new Error(
-            "polyglotAPIOptions or apiKey is required for Polyglot API"
+            "polyglotAPIOptions or apiKey is required for Polyglot API",
           );
         }
         // Use polyglotAPIOptions if provided, otherwise use apiKey
         return new PolyglotAPIAdapter(
-          this.config.polyglotAPIOptions || this.config.apiKey!
+          this.config.polyglotAPIOptions || this.config.apiKey!,
         );
 
       default:
         throw new Error(
-          `Unknown translation provider: ${this.config.provider}`
+          `Unknown translation provider: ${this.config.provider}`,
         );
     }
   }
@@ -96,9 +96,9 @@ class TranslatorImpl implements Translator {
     try {
       // Fetch translations from API
       const results = await this.adapter.translateBatch(
-        this.config.textToTranslate,
+        this.config.textsToTranslate,
         this.config.sourceLang,
-        this.currentLang
+        this.currentLang,
       );
 
       // Store in memory
@@ -149,7 +149,7 @@ class TranslatorImpl implements Translator {
       const results = await this.adapter.translateBatch(
         [text],
         this.config.sourceLang,
-        this.currentLang
+        this.currentLang,
       );
 
       if (results.length > 0) {

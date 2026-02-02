@@ -4,6 +4,8 @@ import type { Plugin } from "vite";
 import { extractTextsFromCode } from "./extractText";
 import type { PluginConfig } from "../types";
 import { autoTranslate } from "./autoTranslate";
+import { transformCodeForTranslation } from "./transformCode";
+import { rewriteSourceFile } from "./rewriteSource";
 
 const DEFAULT_CONFIG: Partial<PluginConfig> = {
   exclude: ["**/node_modules/**", "**/*.test.{jsx,tsx}", "**/*.spec.{jsx,tsx}"],
@@ -12,7 +14,7 @@ const DEFAULT_CONFIG: Partial<PluginConfig> = {
     jsxAttribute: ["placeholder", "title", "aria-label", "alt", "label"],
     stringLiterals: false,
   },
-  minLength: 2,
+  minLength: 3,
   ignore: [],
   verbose: false,
 };
@@ -32,11 +34,17 @@ export function extractTranslatableText(config: PluginConfig): Plugin {
     // Get all files matching include patterns
     const files = await getMatchingFiles(
       mergedConfig.include!,
-      mergedConfig.exclude || []
+      mergedConfig.exclude || [],
     );
 
     if (mergedConfig.verbose) {
-      console.log(`📄 Found ${files.length} files to scan`);
+      console.log(`\n📄 Found ${files.length} files to scan`);
+      if (files.length > 0) {
+        console.log(`   First few files:`, files.slice(0, 3));
+      } else {
+        console.log(`   ⚠️  No files matched patterns:`, mergedConfig.include);
+        console.log(`   Current working directory:`, process.cwd());
+      }
     }
 
     // Extract texts from each file
@@ -61,7 +69,7 @@ export function extractTranslatableText(config: PluginConfig): Plugin {
 
     if (mergedConfig.verbose) {
       console.log(
-        `✅ Extracted ${extractedTexts.length} unique translatable texts`
+        `✅ Extracted ${extractedTexts.length} unique translatable texts`,
       );
     }
 
@@ -77,7 +85,7 @@ export function extractTranslatableText(config: PluginConfig): Plugin {
     fs.writeFileSync(
       outputPath,
       JSON.stringify(extractedTexts, null, 2),
-      "utf-8"
+      "utf-8",
     );
 
     if (mergedConfig.verbose) {
@@ -103,6 +111,29 @@ export function extractTranslatableText(config: PluginConfig): Plugin {
         console.error("❌ Auto-translation failed:", error);
       }
     }
+
+    // Rewrite source files if enabled
+    if (mergedConfig.rewriteSource) {
+      if (mergedConfig.verbose) {
+        console.log("\n✍️  Rewriting source files...");
+      }
+
+      let rewriteCount = 0;
+      for (const file of files) {
+        const success = rewriteSourceFile(
+          file,
+          mergedConfig.minLength || 3,
+          mergedConfig.verbose,
+        );
+        if (success) {
+          rewriteCount++;
+        }
+      }
+
+      if (mergedConfig.verbose) {
+        console.log(`✅ Rewrote ${rewriteCount} source files\n`);
+      }
+    }
   };
 
   return {
@@ -121,13 +152,32 @@ export function extractTranslatableText(config: PluginConfig): Plugin {
       await performExtraction();
     },
 
+    // Transform code to automatically add translation
+    transform(code, id) {
+      if (mergedConfig.autoTransform) {
+        const transformed = transformCodeForTranslation(
+          code,
+          id,
+          mergedConfig.minLength || 3,
+          mergedConfig.verbose,
+        );
+        if (transformed) {
+          return {
+            code: transformed,
+            map: null,
+          };
+        }
+      }
+      return null;
+    },
+
     // Also extract during development for HMR
     async handleHotUpdate({ file }) {
       if (
         await isMatchingFile(
           file,
           mergedConfig.include!,
-          mergedConfig.exclude || []
+          mergedConfig.exclude || [],
         )
       ) {
         if (mergedConfig.verbose) {
@@ -147,13 +197,17 @@ export function extractTranslatableText(config: PluginConfig): Plugin {
  */
 async function getMatchingFiles(
   include: string[],
-  exclude: string[]
+  exclude: string[],
 ): Promise<string[]> {
   const glob = await import("fast-glob");
+
+  const cwd = process.cwd();
 
   return glob.default(include, {
     ignore: exclude,
     absolute: true,
+    cwd: cwd,
+    onlyFiles: true,
   });
 }
 
@@ -163,7 +217,7 @@ async function getMatchingFiles(
 async function isMatchingFile(
   file: string,
   include: string[],
-  exclude: string[]
+  exclude: string[],
 ): Promise<boolean> {
   // Dynamically import minimatch in an ESM-friendly way
   let minimatch: any = null;

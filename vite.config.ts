@@ -9,7 +9,7 @@ export default defineConfig({
     dts({
       include: ["src/**/*"],
       exclude: ["src/**/*.test.ts", "src/**/*.test.tsx"],
-      rollupTypes: true,
+      entryRoot: "src",
     }),
   ],
   build: {
@@ -23,7 +23,19 @@ export default defineConfig({
       formats: ["es", "cjs"],
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime"],
+      external: [
+        "react",
+        "react-dom",
+        "react/jsx-runtime",
+        // Node.js built-in modules needed for the plugin
+        "fs",
+        "path",
+        "os",
+        "crypto",
+        "stream",
+        "util",
+        "events",
+      ],
       output: {
         globals: {
           react: "React",

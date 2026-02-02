@@ -1,6 +1,6 @@
 {
   "name": "i18nsolutions",
-  "version": "1.0.1",
+  "version": "1.0.9",
   "description": "AI-powered automatic translation library for React with intelligent caching and zero-maintenance workflow",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -69,16 +69,18 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "idb": "^8.0.0",
+    "@aws-sdk/client-translate": "^3.493.0",
     "fast-glob": "^3.3.2",
-    "minimatch": "^9.0.3",
-    "@aws-sdk/client-translate": "^3.493.0"
+    "idb": "^8.0.0",
+    "minimatch": "^9.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
+    "@babel/generator": "^7.29.0",
     "@babel/parser": "^7.23.9",
     "@babel/traverse": "^7.23.9",
     "@babel/types": "^7.23.9",
+    "@types/babel__generator": "^7.27.0",
     "@types/babel__traverse": "^7.20.5",
     "@types/node": "^20.11.16",
     "@types/react": "^18.2.55",

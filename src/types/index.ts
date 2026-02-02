@@ -24,7 +24,7 @@ export interface TranslatorConfig {
   apiKey?: string;
   credentials?: AWSCredentials; // For AWS only
   polyglotAPIOptions?: PolyglotAPIAdapterOptions; // For Polyglot API
-  textToTranslate: string[]; // From texts.json
+  textsToTranslate: string[]; // From texts.json (array of text strings)
   fallbackToOriginal?: boolean;
   batchSize?: number; // Default: 100
   retryAttempts?: number; // Default: 3
@@ -46,7 +46,7 @@ export interface TranslationAdapter {
   translateBatch(
     texts: string[] | Record<string, string>,
     sourceLang: string,
-    targetLang: string
+    targetLang: string,
   ): Promise<Translation[]>;
 }
 
@@ -86,6 +86,8 @@ export interface PluginConfig {
   minLength?: number;
   ignore?: RegExp[];
   verbose?: boolean;
+  autoTransform?: boolean; // Automatically transform JSX text to use translation
+  rewriteSource?: boolean; // Actually modify source files (not just build output)
   autoTranslate?: {
     enabled: boolean;
     adapter: TranslationAdapter;
