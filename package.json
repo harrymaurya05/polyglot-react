@@ -1,6 +1,6 @@
 {
   "name": "i18nsolutions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AI-powered automatic translation library for React with intelligent caching and zero-maintenance workflow",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
