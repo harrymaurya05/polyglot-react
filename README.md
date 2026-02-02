@@ -14,6 +14,7 @@ yarn add i18nsolutions
 
 - **Single API Call at Startup** - All translations fetched once and cached
 - **Auto-Extract Translatable Text** - Build-time plugin scans your code automatically
+- **🎯 Auto-Wrap Text Feature** - Automatically wraps JSX text, attributes, and object strings with `t()` calls
 - **⚡ Incremental Auto-Translation** - Only translate new/changed texts (90-99% cost savings)
 - **Smart Caching** - LocalStorage/IndexedDB persistence across sessions
 - **Zero Maintenance** - No manual translation files to manage
@@ -45,7 +46,7 @@ pnpm add i18nsolutions
 
 ### Step 2: Configure Build Plugin
 
-The plugin automatically extracts translatable text from your JSX components.
+The plugin automatically extracts translatable text from your JSX components and can optionally wrap them with translation calls.
 
 #### For Vite Projects
 
@@ -63,9 +64,30 @@ export default defineConfig({
       include: ["src/**/*.{jsx,tsx}"],
       output: "src/translations/texts.json",
       exclude: ["src/**/*.test.{jsx,tsx}"], // Optional: skip test files
+      autoWrapText: true, // 🆕 Automatically wrap text with t() calls
+      verbose: true, // Optional: see what's being processed
     }),
   ],
 });
+```
+
+#### Plugin Configuration Options
+
+```typescript
+{
+  include: string[];           // File patterns to scan (required)
+  output: string;              // Output JSON file path (required)
+  exclude?: string[];          // File patterns to ignore
+  minLength?: number;          // Minimum text length to extract (default: 3)
+  verbose?: boolean;           // Show detailed logs (default: false)
+  autoWrapText?: boolean;      // 🆕 Auto-wrap text with t() (default: false)
+  autoTranslate?: {            // Optional: auto-translate extracted texts
+    enabled: boolean;
+    adapter: TranslationAdapter;
+    sourceLang: string;
+    targetLangs: string[];
+  }
+}
 ```
 
 #### For Create React App (CRA)
@@ -298,14 +320,151 @@ npm run build
 
 That's it! Your app now supports automatic translation with intelligent caching.
 
+## 🎯 Auto-Wrap Text Feature (New!)
+
+The `autoWrapText` feature automatically modifies your source files to wrap translatable text with `t()` calls. This eliminates manual wrapping!
+
+### How It Works
+
+When you enable `autoWrapText: true` in your plugin configuration and run `npm run build`, the plugin:
+
+1. **Scans** all files matching your `include` patterns
+2. **Detects** translatable text (JSX text, attributes, and object properties)
+3. **Modifies** your source files to wrap text with `t()` calls
+4. **Adds** `useTranslate` import and hook if missing
+5. **Extracts** all text to `texts.json` for translation
+
+### What Gets Wrapped
+
+#### ✅ JSX Text Content
+
+**Before:**
+
+```jsx
+function Header() {
+  return <h1>Welcome to Our App</h1>;
+}
+```
+
+**After:**
+
+```jsx
+import { useTranslate } from "i18nsolutions";
+
+function Header() {
+  const t = useTranslate();
+  return <h1>{t("Welcome to Our App")}</h1>;
+}
+```
+
+#### ✅ JSX Attributes
+
+Automatically wraps these attributes:
+
+- `placeholder`
+- `title`
+- `aria-label`
+- `alt`
+- `label`
+
+**Before:**
+
+```jsx
+<input placeholder="Enter your name" />
+<button title="Click me" />
+<img alt="Profile picture" />
+<label label="First Name" />
+```
+
+**After:**
+
+```jsx
+<input placeholder={t("Enter your name")} />
+<button title={t("Click me")} />
+<img alt={t("Profile picture")} />
+<label label={t("First Name")} />
+```
+
+#### ✅ Object Properties
+
+Automatically wraps these object properties:
+
+- `message`
+- `error`
+- `title`
+- `description`
+- `label`
+- `text`
+- `name`
+
+**Before:**
+
+```jsx
+showAlert({
+  message: "Operation completed successfully",
+  type: "success",
+});
+
+const config = {
+  title: "Settings",
+  description: "Configure your preferences",
+  error: "Invalid input",
+};
+```
+
+**After:**
+
+```jsx
+showAlert({
+  message: t("Operation completed successfully"),
+  type: "success",
+});
+
+const config = {
+  title: t("Settings"),
+  description: t("Configure your preferences"),
+  error: t("Invalid input"),
+};
+```
+
+### Smart Features
+
+- ✅ **No Duplicates** - Checks if `useTranslate` is already imported before adding
+- ✅ **Skip Already Wrapped** - Won't wrap text that's already inside `t()` calls
+- ✅ **Works with Existing Code** - Processes files even if they already use `useTranslate`
+- ✅ **Minimum Length** - Only wraps text longer than `minLength` (default: 3 characters)
+- ✅ **Source Modification** - Actually modifies your source files (commit to see changes)
+
+### Usage
+
+```typescript
+// vite.config.ts
+extractTranslatableText({
+  include: ["src/**/*.{jsx,tsx}"],
+  output: "src/translations/texts.json",
+  autoWrapText: true, // Enable auto-wrapping
+  minLength: 3, // Only wrap text with 3+ characters
+  verbose: true, // See detailed logs
+});
+```
+
+### Important Notes
+
+⚠️ **Source Files Are Modified** - The `autoWrapText` feature modifies your actual source files. Always commit your code before running it for the first time, so you can review the changes.
+
+💡 **Run Once** - After the initial run, you can disable `autoWrapText` or leave it enabled. It won't re-wrap already wrapped text.
+
+🎯 **Best Practice** - Use `autoWrapText: true` initially to wrap all existing text, then disable it and manually wrap new text as needed.
+
 ## 📋 Complete Integration Checklist
 
 - [ ] Install `i18nsolutions` package
 - [ ] Configure build plugin in vite.config.js (or CRACO for CRA)
+- [ ] Enable `autoWrapText: true` for automatic text wrapping (optional)
 - [ ] Get translation API key from your chosen provider
 - [ ] Create .env file with API credentials
 - [ ] Wrap app with TranslateProvider
-- [ ] Replace hardcoded text with `t()` function
+- [ ] If not using `autoWrapText`, manually replace hardcoded text with `t()` function
 - [ ] Add language switcher component (optional)
 - [ ] Test translation in development
 - [ ] Build and deploy
@@ -1005,7 +1164,37 @@ MIT © 2025
 - [ ] Translation management dashboard
 - [ ] A/B testing for translations
 
-## 💡 Why Choose i18nsolutions?
+## � Recent Updates
+
+### v1.0.13 (Latest)
+
+- ✅ **Auto-wrap processes all files** - Now works with files that already have `useTranslate` imported
+- ✅ **Smart duplicate prevention** - Won't add duplicate imports or hooks
+- ✅ **Improved wrapping logic** - Better detection of already-wrapped text
+
+### v1.0.12
+
+- ✅ **Object property wrapping** - Auto-wraps strings in objects (`message`, `error`, `title`, etc.)
+- ✅ **Enhanced detection** - Supports common property names in alerts, configs, and notifications
+
+### v1.0.11
+
+- ✅ **Removed autoTransform** - Simplified to single `autoWrapText` feature
+- ✅ **Label attribute support** - Added `label` to supported JSX attributes
+- ✅ **Source file modification** - Direct modification for better visibility
+
+### v1.0.10
+
+- ✅ **Fixed TypeScript error** - Corrected `useTranslate` hook usage from `const { t }` to `const t`
+- ✅ **Renamed feature** - Changed `rewriteSource` to more descriptive `autoWrapText`
+- ✅ **Mutual exclusivity** - Better validation for feature options
+
+### v1.0.9
+
+- ✅ **Introduced autoWrapText** - Automatic source file modification feature
+- ✅ **Smart text detection** - Detects JSX text and attributes automatically
+
+## �💡 Why Choose i18nsolutions?
 
 ### vs Chrome's Built-in Translator
 

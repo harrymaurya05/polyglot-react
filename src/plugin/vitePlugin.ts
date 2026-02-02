@@ -4,8 +4,7 @@ import type { Plugin } from "vite";
 import { extractTextsFromCode } from "./extractText";
 import type { PluginConfig } from "../types";
 import { autoTranslate } from "./autoTranslate";
-import { transformCodeForTranslation } from "./transformCode";
-import { rewriteSourceFile } from "./rewriteSource";
+import { autoWrapTextInFile } from "./rewriteSource";
 
 const DEFAULT_CONFIG: Partial<PluginConfig> = {
   exclude: ["**/node_modules/**", "**/*.test.{jsx,tsx}", "**/*.spec.{jsx,tsx}"],
@@ -47,7 +46,31 @@ export function extractTranslatableText(config: PluginConfig): Plugin {
       }
     }
 
-    // Extract texts from each file
+    // STEP 1: Auto-wrap text in source files if enabled (BEFORE extraction)
+    // This ensures we extract the original unwrapped text only once
+    if (mergedConfig.autoWrapText) {
+      if (mergedConfig.verbose) {
+        console.log("\n✍️  Auto-wrapping text in source files...");
+      }
+
+      let wrappedCount = 0;
+      for (const file of files) {
+        const success = autoWrapTextInFile(
+          file,
+          mergedConfig.minLength || 3,
+          mergedConfig.verbose,
+        );
+        if (success) {
+          wrappedCount++;
+        }
+      }
+
+      if (mergedConfig.verbose) {
+        console.log(`✅ Auto-wrapped text in ${wrappedCount} source files\n`);
+      }
+    }
+
+    // STEP 2: Extract texts from each file (after wrapping, extracts t() keys)
     for (const file of files) {
       try {
         const code = fs.readFileSync(file, "utf-8");
@@ -92,7 +115,7 @@ export function extractTranslatableText(config: PluginConfig): Plugin {
       console.log(`💾 Saved to ${outputPath}\n`);
     }
 
-    // Auto-translate if enabled
+    // STEP 3: Auto-translate if enabled (translates the extracted keys)
     if (mergedConfig.autoTranslate?.enabled) {
       if (mergedConfig.verbose) {
         console.log("🚀 Starting auto-translation...");
@@ -111,29 +134,6 @@ export function extractTranslatableText(config: PluginConfig): Plugin {
         console.error("❌ Auto-translation failed:", error);
       }
     }
-
-    // Rewrite source files if enabled
-    if (mergedConfig.rewriteSource) {
-      if (mergedConfig.verbose) {
-        console.log("\n✍️  Rewriting source files...");
-      }
-
-      let rewriteCount = 0;
-      for (const file of files) {
-        const success = rewriteSourceFile(
-          file,
-          mergedConfig.minLength || 3,
-          mergedConfig.verbose,
-        );
-        if (success) {
-          rewriteCount++;
-        }
-      }
-
-      if (mergedConfig.verbose) {
-        console.log(`✅ Rewrote ${rewriteCount} source files\n`);
-      }
-    }
   };
 
   return {
@@ -150,25 +150,6 @@ export function extractTranslatableText(config: PluginConfig): Plugin {
 
     async buildStart() {
       await performExtraction();
-    },
-
-    // Transform code to automatically add translation
-    transform(code, id) {
-      if (mergedConfig.autoTransform) {
-        const transformed = transformCodeForTranslation(
-          code,
-          id,
-          mergedConfig.minLength || 3,
-          mergedConfig.verbose,
-        );
-        if (transformed) {
-          return {
-            code: transformed,
-            map: null,
-          };
-        }
-      }
-      return null;
     },
 
     // Also extract during development for HMR

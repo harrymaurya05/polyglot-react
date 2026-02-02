@@ -86,8 +86,7 @@ export interface PluginConfig {
   minLength?: number;
   ignore?: RegExp[];
   verbose?: boolean;
-  autoTransform?: boolean; // Automatically transform JSX text to use translation
-  rewriteSource?: boolean; // Actually modify source files (not just build output)
+  autoWrapText?: boolean; // Modify source files to wrap text with t() calls
   autoTranslate?: {
     enabled: boolean;
     adapter: TranslationAdapter;

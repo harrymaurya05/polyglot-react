@@ -9,10 +9,10 @@ const traverseFn = (traverse as any).default || traverse;
 const generateFn = (generate as any).default || generate;
 
 /**
- * Rewrite a source file to add translation calls
+ * Auto-wrap text in a source file with translation calls
  * This modifies the actual source file on disk
  */
-export function rewriteSourceFile(
+export function autoWrapTextInFile(
   filePath: string,
   minLength: number = 3,
   verbose: boolean = false,
@@ -24,14 +24,6 @@ export function rewriteSourceFile(
 
   try {
     const code = fs.readFileSync(filePath, "utf-8");
-
-    // Skip if already uses useTranslate
-    if (code.includes("useTranslate")) {
-      if (verbose) {
-        console.log(`  ⏭️  Already transformed: ${filePath}`);
-      }
-      return false;
-    }
 
     const ast = parse(code, {
       sourceType: "module",
@@ -53,9 +45,32 @@ export function rewriteSourceFile(
       JSXAttribute(path: any) {
         if (
           path.node.name.type === "JSXIdentifier" &&
-          ["placeholder", "title", "aria-label", "alt"].includes(
+          ["placeholder", "title", "aria-label", "alt", "label"].includes(
             path.node.name.name,
           )
+        ) {
+          if (
+            path.node.value &&
+            path.node.value.type === "StringLiteral" &&
+            path.node.value.value.length >= minLength
+          ) {
+            hasTranslatableText = true;
+          }
+        }
+      },
+      ObjectProperty(path: any) {
+        // Check for translatable strings in object properties like message, error, title, etc.
+        if (
+          path.node.key.type === "Identifier" &&
+          [
+            "message",
+            "error",
+            "title",
+            "description",
+            "label",
+            "text",
+            "name",
+          ].includes(path.node.key.name)
         ) {
           if (
             path.node.value &&
@@ -77,7 +92,7 @@ export function rewriteSourceFile(
 
     // Second pass: transform the code
     traverseFn(ast, {
-      // Add useTranslate hook to top-level function components only
+      // Add useTranslate hook to all function components
       Program(path: any) {
         // Find all top-level function declarations and arrow functions
         for (const statement of path.node.body) {
@@ -89,13 +104,32 @@ export function rewriteSourceFile(
             needsImport = true;
           } else if (statement.type === "VariableDeclaration") {
             for (const decl of statement.declarations) {
-              if (
-                decl.init &&
-                (decl.init.type === "ArrowFunctionExpression" ||
-                  decl.init.type === "FunctionExpression")
-              ) {
-                addUseTranslateHook({ node: decl.init });
-                needsImport = true;
+              if (decl.init) {
+                // Handle direct arrow/function expressions
+                if (
+                  decl.init.type === "ArrowFunctionExpression" ||
+                  decl.init.type === "FunctionExpression"
+                ) {
+                  addUseTranslateHook({ node: decl.init });
+                  needsImport = true;
+                }
+                // Handle React.memo() wrapped components
+                else if (
+                  decl.init.type === "CallExpression" &&
+                  decl.init.callee.type === "MemberExpression" &&
+                  decl.init.callee.object.name === "React" &&
+                  decl.init.callee.property.name === "memo" &&
+                  decl.init.arguments.length > 0
+                ) {
+                  const wrappedComponent = decl.init.arguments[0];
+                  if (
+                    wrappedComponent.type === "ArrowFunctionExpression" ||
+                    wrappedComponent.type === "FunctionExpression"
+                  ) {
+                    addUseTranslateHook({ node: wrappedComponent });
+                    needsImport = true;
+                  }
+                }
               }
             }
           } else if (statement.type === "ExportDefaultDeclaration") {
@@ -105,6 +139,23 @@ export function rewriteSourceFile(
             ) {
               addUseTranslateHook({ node: statement.declaration });
               needsImport = true;
+            }
+            // Handle export default React.memo()
+            else if (
+              statement.declaration.type === "CallExpression" &&
+              statement.declaration.callee.type === "MemberExpression" &&
+              statement.declaration.callee.object.name === "React" &&
+              statement.declaration.callee.property.name === "memo" &&
+              statement.declaration.arguments.length > 0
+            ) {
+              const wrappedComponent = statement.declaration.arguments[0];
+              if (
+                wrappedComponent.type === "ArrowFunctionExpression" ||
+                wrappedComponent.type === "FunctionExpression"
+              ) {
+                addUseTranslateHook({ node: wrappedComponent });
+                needsImport = true;
+              }
             }
           }
         }
@@ -125,7 +176,7 @@ export function rewriteSourceFile(
       JSXAttribute(path: any) {
         if (
           path.node.name.type === "JSXIdentifier" &&
-          ["placeholder", "title", "aria-label", "alt"].includes(
+          ["placeholder", "title", "aria-label", "alt", "label"].includes(
             path.node.name.name,
           )
         ) {
@@ -142,20 +193,60 @@ export function rewriteSourceFile(
           }
         }
       },
+      // Transform object properties
+      ObjectProperty(path: any) {
+        if (
+          path.node.key.type === "Identifier" &&
+          [
+            "message",
+            "error",
+            "title",
+            "description",
+            "label",
+            "text",
+            "name",
+          ].includes(path.node.key.name)
+        ) {
+          if (
+            path.node.value &&
+            path.node.value.type === "StringLiteral" &&
+            path.node.value.value.length >= minLength
+          ) {
+            const text = path.node.value.value;
+            path.node.value = t.callExpression(t.identifier("t"), [
+              t.stringLiteral(text),
+            ]);
+            transformedCount++;
+          }
+        }
+      },
     });
 
-    // Add import statement if needed
+    // Add import statement if needed (check if it already exists)
     if (needsImport) {
-      const importDeclaration = t.importDeclaration(
-        [
-          t.importSpecifier(
-            t.identifier("useTranslate"),
-            t.identifier("useTranslate"),
+      const hasUseTranslateImport = ast.program.body.some(
+        (node: any) =>
+          node.type === "ImportDeclaration" &&
+          node.source.value === "i18nsolutions" &&
+          node.specifiers.some(
+            (spec: any) =>
+              spec.type === "ImportSpecifier" &&
+              spec.imported.name === "useTranslate",
           ),
-        ],
-        t.stringLiteral("i18nsolutions"),
       );
-      ast.program.body.unshift(importDeclaration);
+
+      if (!hasUseTranslateImport) {
+        const importDeclaration = t.importDeclaration(
+          [
+            t.importSpecifier(
+              t.identifier("useTranslate"),
+              t.identifier("useTranslate"),
+            ),
+          ],
+          t.stringLiteral("i18nsolutions"),
+        );
+        ast.program.body.unshift(importDeclaration);
+      }
     }
 
     // Generate the new code
@@ -199,13 +290,31 @@ function isReactComponent(node: any): boolean {
 
 function addUseTranslateHook(path: any) {
   const node = path.node;
-  const body = node.body;
+  if (!node) return;
+
+  let body = node.body;
+
+  // Handle arrow functions with implicit return: () => (...)
+  if (body && body.type !== "BlockStatement") {
+    try {
+      // Convert implicit return to explicit block statement
+      const returnStatement = t.returnStatement(body);
+      const blockBody = t.blockStatement([returnStatement]);
+      node.body = blockBody;
+      body = blockBody;
+    } catch (error) {
+      // If we can't modify the node, skip it
+      return;
+    }
+  }
 
   if (!body || body.type !== "BlockStatement") return;
+  if (!body.body || !Array.isArray(body.body)) return;
 
   // Check if function has 't' as a parameter
   const params = node.params || [];
   for (const param of params) {
+    if (!param) continue;
     if (param.type === "Identifier" && param.name === "t") {
       return;
     }
